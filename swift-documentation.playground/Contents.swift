@@ -250,3 +250,25 @@ class testFunc: exampleProto {
         print("A simple description")
     }
 }
+
+print(0b11010)
+
+//decimal -> 26, bianary -> 0b11010, Octa -> 0o32, Hexa -> 0x1A
+
+//Generics -> defined in <> brackets. Used to make func generic to parameter types
+
+func makeArray<Item>(itemToAdd: Item, numOfTimes: Int) -> [Item] {
+    var result = [Item]()
+    for _ in 0..<numOfTimes {
+        result.append(itemToAdd)
+    }
+    return result
+}
+
+let stringArray = makeArray(itemToAdd: "Robbie", numOfTimes: 10)
+
+print(stringArray)
+
+let intArray = makeArray(itemToAdd: 26, numOfTimes: 5)
+
+print(intArray)
