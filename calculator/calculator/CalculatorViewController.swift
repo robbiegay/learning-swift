@@ -30,9 +30,7 @@ class CalculatorViewController: UIViewController {
     }
     
     func createButtons() {
-        let viewHeight = self.view.frame.height / 100
-        let viewWidth = self.view.frame.width / 100
-        let buttonDimensions = viewWidth * 20
+        let buttonDimensions = (self.view.frame.width / 100) * 20
         
         let calcBtns = ["C", "", "", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", "", ".", "="]
         var tagNum = 1
@@ -43,7 +41,7 @@ class CalculatorViewController: UIViewController {
                 button.addTarget(self, action: #selector(handleClick), for: .touchUpInside)
             }
             self.view.addSubview(button)
-
+            
             button.height(buttonDimensions)
             button.width(buttonDimensions)
             button.setTitle(buttonLabel, for: .normal)
@@ -51,7 +49,7 @@ class CalculatorViewController: UIViewController {
             button.layer.cornerRadius = buttonDimensions / 2
             button.layer.masksToBounds = true
             button.tag = tagNum
-
+            
             tagNum += 1
         }
     }
@@ -83,97 +81,101 @@ class CalculatorViewController: UIViewController {
         displayScreen.widthToSuperview()
         
         // COL 1
-
+        
         view.viewWithTag(1)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(1)!.topToBottom(of: displayScreen, offset: viewHeight * 2)
+        view.viewWithTag(1)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
         view.viewWithTag(1)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
         
-        view.viewWithTag(2)!.leading(to: view.viewWithTag(1)!, offset: viewWidth * 24)
-        view.viewWithTag(2)!.topToBottom(of: displayScreen, offset: viewHeight * 2)
+        view.viewWithTag(2)!.leadingToTrailing(of: view.viewWithTag(1)!, offset: viewWidth * 4)
+        view.viewWithTag(2)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
         view.viewWithTag(2)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
         
-        view.viewWithTag(3)!.leading(to: view.viewWithTag(2)!, offset: viewWidth * 24)
-        view.viewWithTag(3)!.topToBottom(of: displayScreen, offset: viewHeight * 2)
+        view.viewWithTag(3)!.leadingToTrailing(of: view.viewWithTag(2)!, offset: viewWidth * 4)
+        view.viewWithTag(3)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
         view.viewWithTag(3)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
         
-        view.viewWithTag(4)!.leading(to: view.viewWithTag(3)!, offset: viewWidth * 24)
-        view.viewWithTag(4)!.topToBottom(of: displayScreen, offset: viewHeight * 2)
+        view.viewWithTag(4)!.leadingToTrailing(of: view.viewWithTag(3)!, offset: viewWidth * 4)
+        view.viewWithTag(4)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
         view.viewWithTag(4)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
         
         // COL 2
         
         view.viewWithTag(5)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(5)!.topToBottom(of: displayScreen, offset: viewHeight * 14)
+        view.viewWithTag(5)!.topToBottom(of: view.viewWithTag(1)!, offset: viewHeight * 2.5)
         view.viewWithTag(5)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(6)!.leading(to: view.viewWithTag(5)!, offset: viewWidth * 24)
-        view.viewWithTag(6)!.topToBottom(of: displayScreen, offset: viewHeight * 14)
+        view.viewWithTag(6)!.leadingToTrailing(of: view.viewWithTag(5)!, offset: viewWidth * 4)
+        view.viewWithTag(6)!.topToBottom(of: view.viewWithTag(2)!, offset: viewHeight * 2.5)
         view.viewWithTag(6)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(7)!.leading(to: view.viewWithTag(6)!, offset: viewWidth * 24)
-        view.viewWithTag(7)!.topToBottom(of: displayScreen, offset: viewHeight * 14)
+        view.viewWithTag(7)!.leadingToTrailing(of: view.viewWithTag(6)!, offset: viewWidth * 4)
+        view.viewWithTag(7)!.topToBottom(of: view.viewWithTag(3)!, offset: viewHeight * 2.5)
         view.viewWithTag(7)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(8)!.leading(to: view.viewWithTag(7)!, offset: viewWidth * 24)
-        view.viewWithTag(8)!.topToBottom(of: displayScreen, offset: viewHeight * 14)
+        view.viewWithTag(8)!.leadingToTrailing(of: view.viewWithTag(7)!, offset: viewWidth * 4)
+        view.viewWithTag(8)!.topToBottom(of: view.viewWithTag(4)!, offset: viewHeight * 2.5)
         view.viewWithTag(8)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
         
         // COL 3
         
         view.viewWithTag(9)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(9)!.topToBottom(of: displayScreen, offset: viewHeight * 24)
+        view.viewWithTag(9)!.topToBottom(of: view.viewWithTag(5)!, offset: viewHeight * 2.5)
         view.viewWithTag(9)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(10)!.leading(to: view.viewWithTag(9)!, offset: viewWidth * 24)
-        view.viewWithTag(10)!.topToBottom(of: displayScreen, offset: viewHeight * 24)
+        view.viewWithTag(10)!.leadingToTrailing(of: view.viewWithTag(9)!, offset: viewWidth * 4)
+        view.viewWithTag(10)!.topToBottom(of: view.viewWithTag(6)!, offset: viewHeight * 2.5)
         view.viewWithTag(10)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(11)!.leading(to: view.viewWithTag(10)!, offset: viewWidth * 24)
-        view.viewWithTag(11)!.topToBottom(of: displayScreen, offset: viewHeight * 24)
+        view.viewWithTag(11)!.leadingToTrailing(of: view.viewWithTag(10)!, offset: viewWidth * 4)
+        view.viewWithTag(11)!.topToBottom(of: view.viewWithTag(7)!, offset: viewHeight * 2.5)
         view.viewWithTag(11)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(12)!.leading(to: view.viewWithTag(11)!, offset: viewWidth * 24)
-        view.viewWithTag(12)!.topToBottom(of: displayScreen, offset: viewHeight * 24)
+        view.viewWithTag(12)!.leadingToTrailing(of: view.viewWithTag(11)!, offset: viewWidth * 4)
+        view.viewWithTag(12)!.topToBottom(of: view.viewWithTag(8)!, offset: viewHeight * 2.5)
         view.viewWithTag(12)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
         
         // COL 4
         
         view.viewWithTag(13)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(13)!.topToBottom(of: displayScreen, offset: viewHeight * 34)
+        view.viewWithTag(13)!.topToBottom(of: view.viewWithTag(9)!, offset: viewHeight * 2.5)
         view.viewWithTag(13)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(14)!.leading(to: view.viewWithTag(13)!, offset: viewWidth * 24)
-        view.viewWithTag(14)!.topToBottom(of: displayScreen, offset: viewHeight * 34)
+        view.viewWithTag(14)!.leadingToTrailing(of: view.viewWithTag(13)!, offset: viewWidth * 4)
+        view.viewWithTag(14)!.topToBottom(of: view.viewWithTag(10)!, offset: viewHeight * 2.5)
         view.viewWithTag(14)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(15)!.leading(to: view.viewWithTag(14)!, offset: viewWidth * 24)
-        view.viewWithTag(15)!.topToBottom(of: displayScreen, offset: viewHeight * 34)
+        view.viewWithTag(15)!.leadingToTrailing(of: view.viewWithTag(14)!, offset: viewWidth * 4)
+        view.viewWithTag(15)!.topToBottom(of: view.viewWithTag(11)!, offset: viewHeight * 2.5)
         view.viewWithTag(15)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(16)!.leading(to: view.viewWithTag(15)!, offset: viewWidth * 24)
-        view.viewWithTag(16)!.topToBottom(of: displayScreen, offset: viewHeight * 34)
+        view.viewWithTag(16)!.leadingToTrailing(of: view.viewWithTag(15)!, offset: viewWidth * 4)
+        view.viewWithTag(16)!.topToBottom(of: view.viewWithTag(12)!, offset: viewHeight * 2.5)
         view.viewWithTag(16)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
         
         // COL 5
         
         view.viewWithTag(17)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(17)!.topToBottom(of: displayScreen, offset: viewHeight * 44)
+        view.viewWithTag(17)!.topToBottom(of: view.viewWithTag(13)!, offset: viewHeight * 2.5)
         view.viewWithTag(17)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(18)!.leading(to: view.viewWithTag(17)!, offset: viewWidth * 24)
-        view.viewWithTag(18)!.topToBottom(of: displayScreen, offset: viewHeight * 44)
+        view.viewWithTag(18)!.leadingToTrailing(of: view.viewWithTag(17)!, offset: viewWidth * 4)
+        view.viewWithTag(18)!.topToBottom(of: view.viewWithTag(14)!, offset: viewHeight * 2.5)
         view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         
-        view.viewWithTag(19)!.leading(to: view.viewWithTag(18)!, offset: viewWidth * 24)
-        view.viewWithTag(19)!.topToBottom(of: displayScreen, offset: viewHeight * 44)
+        view.viewWithTag(19)!.leadingToTrailing(of: view.viewWithTag(18)!, offset: viewWidth * 4)
+        view.viewWithTag(19)!.topToBottom(of: view.viewWithTag(15)!, offset: viewHeight * 2.5)
         view.viewWithTag(19)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-    
-        view.viewWithTag(20)!.leading(to: view.viewWithTag(19)!, offset: viewWidth * 24)
-        view.viewWithTag(20)!.topToBottom(of: displayScreen, offset: viewHeight * 44)
+        
+        view.viewWithTag(20)!.leadingToTrailing(of: view.viewWithTag(19)!, offset: viewWidth * 4)
+        view.viewWithTag(20)!.topToBottom(of: view.viewWithTag(16)!, offset: viewHeight * 2.5)
         view.viewWithTag(20)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
     }
     
-    @objc func handleClick() {
-        print("Clicked")
+    @objc func handleClick(_ sender: AnyObject?) {
+        let calcBtns = ["C", "", "", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", "", ".", "="]
+        
+        let idx = Int(sender?.tag?.description ?? "-1")
+        
+        displayScreen.text = calcBtns[idx! - 1]
     }
 }
