@@ -14,7 +14,7 @@
 		4551560A23E1D1620048FF5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4551560923E1D1620048FF5B /* Preview Assets.xcassets */; };
 		4551560D23E1D1620048FF5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4551560B23E1D1620048FF5B /* LaunchScreen.storyboard */; };
 		4551561523E1D68C0048FF5B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551561423E1D68C0048FF5B /* CalculatorViewController.swift */; };
-		BEEBFAE472BA51247D9361A4 /* Pods_calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17907FB270CD8DE67D8B83D2 /* Pods_calculator.framework */; };
+		45DF433423E2177D00A5CD3F /* Pods_calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17907FB270CD8DE67D8B83D2 /* Pods_calculator.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +30,7 @@
 		4551560C23E1D1620048FF5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4551560E23E1D1620048FF5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4551561423E1D68C0048FF5B /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		45DF433023E2176000A5CD3F /* TinyConstraints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TinyConstraints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEEBFAE472BA51247D9361A4 /* Pods_calculator.framework in Frameworks */,
+				45DF433423E2177D00A5CD3F /* Pods_calculator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +57,7 @@
 		2377854407E094AA1E60F7C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45DF433023E2176000A5CD3F /* TinyConstraints.framework */,
 				17907FB270CD8DE67D8B83D2 /* Pods_calculator.framework */,
 			);
 			name = Frameworks;
@@ -360,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 54YR42Q56C;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -382,6 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"calculator/Preview Content\"";
 				DEVELOPMENT_TEAM = 54YR42Q56C;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = calculator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
