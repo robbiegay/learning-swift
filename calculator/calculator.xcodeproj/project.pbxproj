@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452C8F6623E2391300EBCC22 /* TinyConstraints.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45DF433023E2176000A5CD3F /* TinyConstraints.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4551560123E1D1600048FF5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551560023E1D1600048FF5B /* AppDelegate.swift */; };
 		4551560323E1D1600048FF5B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551560223E1D1600048FF5B /* SceneDelegate.swift */; };
 		4551560523E1D1600048FF5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551560423E1D1600048FF5B /* ContentView.swift */; };
@@ -16,6 +17,19 @@
 		4551561523E1D68C0048FF5B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551561423E1D68C0048FF5B /* CalculatorViewController.swift */; };
 		45DF433423E2177D00A5CD3F /* Pods_calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17907FB270CD8DE67D8B83D2 /* Pods_calculator.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		452C8F6523E238DB00EBCC22 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				452C8F6623E2391300EBCC22 /* TinyConstraints.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		042B75A115B1FE0D30AD2B82 /* Pods-calculator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculator.release.xcconfig"; path = "Target Support Files/Pods-calculator/Pods-calculator.release.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +126,7 @@
 			buildConfigurationList = 4551561123E1D1620048FF5B /* Build configuration list for PBXNativeTarget "calculator" */;
 			buildPhases = (
 				1154A351A6F53C88725FE83C /* [CP] Check Pods Manifest.lock */,
+				452C8F6523E238DB00EBCC22 /* CopyFiles */,
 				455155F923E1D1600048FF5B /* Sources */,
 				455155FA23E1D1600048FF5B /* Frameworks */,
 				455155FB23E1D1600048FF5B /* Resources */,
@@ -365,7 +380,7 @@
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = calculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -388,7 +403,7 @@
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = calculator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
