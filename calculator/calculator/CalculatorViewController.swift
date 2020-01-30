@@ -42,6 +42,10 @@ class CalculatorViewController: UIViewController {
             if buttonLabel != "" {
                 button.addTarget(self, action: #selector(handleClick), for: .touchUpInside)
             }
+            // Adds the Easter Egg button click event
+            if tagNum == 18 {
+                button.addTarget(self, action: #selector(handleEasterEgg), for: .touchUpInside)
+            }
             self.view.addSubview(button)
             
             button.height(buttonDimensions)
@@ -58,11 +62,11 @@ class CalculatorViewController: UIViewController {
     
     func styleSubviews() {
         /*
-        Display height = 30% of view
-        Button section height = 70%
-        Each button = 20 % of width, with 4% width padding on each side
-        Button height could be 10% of height and 4% width padding
-        */
+         Display height = 30% of view
+         Button section height = 70%
+         Each button = 20 % of width, with 4% width padding on each side
+         Button height could be 10% of height and 4% width padding
+         */
         
         // Gets 1% of height and width
         let viewHeight = self.view.frame.height / 100
@@ -185,7 +189,7 @@ class CalculatorViewController: UIViewController {
         
         let idx = Int(sender?.tag?.description ?? "-1")
         let keyVal = calcBtns[idx! - 1]
-                
+        
         if (keyVal == "C" || keyVal == "÷" || keyVal == "X" || keyVal == "-" || keyVal == "+" || keyVal == "=" || keyVal == ".") {
             symPress(keyVal)
         } else {
@@ -210,6 +214,13 @@ class CalculatorViewController: UIViewController {
             displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 4)
         } else {
             displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 3)
+        }
+        
+        // Display Easter Egg Button
+        if displayScreen.text == "32193" {
+            view.viewWithTag(18)!.backgroundColor = .purple
+        } else {
+            view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         }
         
         // Debugging Logs:
@@ -440,41 +451,105 @@ class CalculatorViewController: UIViewController {
         eqPress = false
     }
     
-//    func removeDecimal(_ val: String) -> String {
-//        var output = val
-//        // Checks to see if there are any numbers after the decimal
-//        if val.contains(".") {
-//            // Adds the display text to an Array
-//            var displayTextArray = [Character]()
-//            for char in displayScreen.text! {
-//                displayTextArray.append(char)
-//            }
-//            let i = displayTextArray.firstIndex(of: ".")! + 1
-//            if (
-//                displayTextArray[i...].contains("1") ||
-//                displayTextArray[i...].contains("2") ||
-//                displayTextArray[i...].contains("3") ||
-//                displayTextArray[i...].contains("4") ||
-//                displayTextArray[i...].contains("5") ||
-//                displayTextArray[i...].contains("6") ||
-//                displayTextArray[i...].contains("7") ||
-//                displayTextArray[i...].contains("8") ||
-//                displayTextArray[i...].contains("9")
-//                ) {
-//                print("Contains some numbers")
-//                displayTextArray.removeSubrange((i - 1)...)
-//                output = ""
-//                for char in displayTextArray {
-//                    output += String(char)
-//                }
-//                print("The new string ->",output)
-//            }
-//        }
-//        return output
-//    }
+    // -------- Easter Egg Logic --------
+    
+    var easterEgg = false
+    var displayColorTimer: Timer?
+    var textColorTimer: Timer?
+    var redColor = 0.0
+    var greenColor = 0.3
+    var blueColor = 0.6
+    var redForward = true
+    var greenForward = true
+    var blueForward = true
+    var textColor = false
+    
+    @objc func handleEasterEgg() {
+        if displayScreen.text == "32193" && !easterEgg {
+            easterEgg = true
+            displayColorTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(rainbowColors), userInfo: nil, repeats: true)
+            textColorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(textColors), userInfo: nil, repeats: true)
+            //            displayScreen.textColor = .white
+        } else {
+            displayScreen.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
+            displayPadding.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
+            displayScreen.textColor = #colorLiteral(red: 0.3411012292, green: 0.3455565274, blue: 0.3205627799, alpha: 1)
+            easterEgg = false
+            displayColorTimer?.invalidate()
+            textColorTimer?.invalidate()
+        }
+    }
+    
+    @objc func rainbowColors() {
+        if redColor < 0.9 && redForward {
+            redColor += 0.05
+        } else {
+            redForward = redColor <= 0.1
+            redColor -= 0.01
+        }
+        if greenColor < 0.9 && greenForward {
+            greenColor += 0.01
+        } else {
+            greenForward = greenColor <= 0.1
+            greenColor -= 0.05
+        }
+        if blueColor < 0.9 && blueForward {
+            blueColor += 0.05
+        } else {
+            blueForward = blueColor <= 0.1
+            blueColor -= 0.05
+        }
+        displayScreen.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: 1.0)
+        displayPadding.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: 1.0)
+    }
+    
+    @objc func textColors() {
+        if textColor {
+            displayScreen.textColor = .black
+        } else {
+            displayScreen.textColor = .white
+        }
+        textColor = !textColor
+    }
+    
+    
+    // ATTEMPT AT REMOVING DECIMAL
+    //    func removeDecimal(_ val: String) -> String {
+    //        var output = val
+    //        // Checks to see if there are any numbers after the decimal
+    //        if val.contains(".") {
+    //            // Adds the display text to an Array
+    //            var displayTextArray = [Character]()
+    //            for char in displayScreen.text! {
+    //                displayTextArray.append(char)
+    //            }
+    //            let i = displayTextArray.firstIndex(of: ".")! + 1
+    //            if (
+    //                displayTextArray[i...].contains("1") ||
+    //                displayTextArray[i...].contains("2") ||
+    //                displayTextArray[i...].contains("3") ||
+    //                displayTextArray[i...].contains("4") ||
+    //                displayTextArray[i...].contains("5") ||
+    //                displayTextArray[i...].contains("6") ||
+    //                displayTextArray[i...].contains("7") ||
+    //                displayTextArray[i...].contains("8") ||
+    //                displayTextArray[i...].contains("9")
+    //                ) {
+    //                print("Contains some numbers")
+    //                displayTextArray.removeSubrange((i - 1)...)
+    //                output = ""
+    //                for char in displayTextArray {
+    //                    output += String(char)
+    //                }
+    //                print("The new string ->",output)
+    //            }
+    //        }
+    //        return output
+    //    }
 }
 
 /*
  Things to fix:
  - Calulations result in decimal values even when 4.0
+ - Get app loaded on my phone
  */
