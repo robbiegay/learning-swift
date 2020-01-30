@@ -218,7 +218,7 @@ class CalculatorViewController: UIViewController {
         
         // Display Easter Egg Button
         if displayScreen.text == "32193" {
-            view.viewWithTag(18)!.backgroundColor = .purple
+            view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         } else {
             view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         }
@@ -469,7 +469,6 @@ class CalculatorViewController: UIViewController {
             easterEgg = true
             displayColorTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(rainbowColors), userInfo: nil, repeats: true)
             textColorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(textColors), userInfo: nil, repeats: true)
-            //            displayScreen.textColor = .white
         } else {
             displayScreen.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
             displayPadding.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
@@ -510,6 +509,13 @@ class CalculatorViewController: UIViewController {
             displayScreen.textColor = .white
         }
         textColor = !textColor
+    }
+    
+    // Prevents a "strong reference cycle"
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        displayColorTimer?.invalidate()
+        textColorTimer?.invalidate()
     }
     
     
