@@ -17,11 +17,13 @@ class CalculatorViewController: UIViewController {
     var equalTemp = Int()
     var eqPress = false
     
+    let displayPadding = UILabel()
     let displayScreen = UILabel()
     let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(displayPadding)
         view.addSubview(displayScreen)
         view.addSubview(button)
         
@@ -78,7 +80,13 @@ class CalculatorViewController: UIViewController {
         displayScreen.topToSuperview()
         displayScreen.leadingToSuperview()
         displayScreen.height(viewHeight * 30)
-        displayScreen.widthToSuperview()
+        displayScreen.width(viewWidth * 95)
+        
+        displayPadding.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
+        displayPadding.topToSuperview()
+        displayPadding.leadingToTrailing(of: displayScreen)
+        displayPadding.height(viewHeight * 30)
+        displayPadding.widthToSuperview()
         
         // COL 1
         
