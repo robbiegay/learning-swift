@@ -1,0 +1,6 @@
+module Pods_testSinglePage {
+  umbrella header "Pods-testSinglePage-umbrella.h"
+
+  export *
+  module * { export * }
+}
