@@ -469,7 +469,7 @@ class CalculatorViewController: UIViewController {
             easterEgg = true
             displayColorTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(rainbowColors), userInfo: nil, repeats: true)
             textColorTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(textColors), userInfo: nil, repeats: true)
-        } else {
+        } else if displayScreen.text == "32193" && easterEgg  {
             displayScreen.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
             displayPadding.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
             displayScreen.textColor = #colorLiteral(red: 0.3411012292, green: 0.3455565274, blue: 0.3205627799, alpha: 1)
