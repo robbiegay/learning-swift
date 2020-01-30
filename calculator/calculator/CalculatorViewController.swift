@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
     var num1 = ""
     var num2 = ""
     var operand = ""
-    var equalTemp = String()
+    var equalTemp = ""
     var eqPress = false
     
     let displayPadding = UILabel()
@@ -75,7 +75,7 @@ class CalculatorViewController: UIViewController {
         displayScreen.text = "0"
         displayScreen.textColor = #colorLiteral(red: 0.3411012292, green: 0.3455565274, blue: 0.3205627799, alpha: 1)
         displayScreen.textAlignment = .right
-        displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 10)
+        displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 15)
         
         displayScreen.topToSuperview()
         displayScreen.leadingToSuperview()
@@ -180,6 +180,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @objc func handleClick(_ sender: AnyObject?) {
+        let viewHeight = self.view.frame.height / 100
         let calcBtns = ["C", "", "", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", "", ".", "="]
         
         let idx = Int(sender?.tag?.description ?? "-1")
@@ -191,10 +192,26 @@ class CalculatorViewController: UIViewController {
             numPress(keyVal)
         }
         // If NaN (for example, from 0/0) clears the calc and displays a message)
-        if (displayScreen.text == "NaN") {
+        if (displayScreen.text == "nan") {
             clear()
             displayScreen.text = "-Undefined-"
         }
+        
+        // Adjust the font size
+        if displayScreen.text!.count < 5 {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 15)
+        } else if displayScreen.text!.count < 8 {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 10)
+        } else if displayScreen.text!.count < 12 {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 7)
+        } else if displayScreen.text!.count < 15 {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 5)
+        } else if displayScreen.text!.count < 20 {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 4)
+        } else {
+            displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 3)
+        }
+        
         // Debugging Logs:
         print("Equation: \(num1)  \(operand) \(num2)")
         print("Equal temp num: \(equalTemp) eqPress: \(eqPress)")
@@ -204,7 +221,7 @@ class CalculatorViewController: UIViewController {
     // If a number is pressed
     func numPress(_ inputNum: String) {
         // Resets the equal temp number on any number press
-        equalTemp = String()
+        equalTemp = ""
         // If equal was just pressed, followed by a number, clears the calc
         if eqPress {
             clear()
@@ -214,8 +231,8 @@ class CalculatorViewController: UIViewController {
             // Makes it so you can"t enter 00000
             if inputNum == "0" && num1 == "0" {
                 num1 = ""
-                // Caps the input length at 7 digits
-            } else if num1.count < 7 {
+                // Caps the input length at 10 digits
+            } else if num1.count < 10 {
                 if num1 == "0" {
                     num1 = ""
                 }
@@ -226,7 +243,7 @@ class CalculatorViewController: UIViewController {
         } else {
             if inputNum == "0" && num2 == "0" {
                 num2 = ""
-            } else if num2.count < 7 {
+            } else if num2.count < 10 {
                 if num2 == "0" {
                     num2 = ""
                 }
@@ -240,7 +257,7 @@ class CalculatorViewController: UIViewController {
     func symPress(_ inputSym: String) {
         // If the sym is not =, then reset the equal values
         if inputSym != "=" {
-            equalTemp = String()
+            equalTemp = ""
             eqPress = false
         }
         // Switch cases for various symbols
@@ -384,30 +401,29 @@ class CalculatorViewController: UIViewController {
         case "+":
             // If equal"s temp num has not been defined yet, define it
             // Otherwise, keep performing calculations using the old value
-            if (equalTemp == String()) {
+            if (equalTemp == "") {
                 equalTemp = num1
             }
-            num1 = String(Double(num1)! + Double(num2)!)
+            num1 = String(Double(num1)! + Double(equalTemp)!)
             num2 = ""
         case "-":
-            if (equalTemp == String()) {
+            if (equalTemp == "") {
                 equalTemp = num1
             }
-            num1 = String(Double(num1)! - Double(num2)!)
+            num1 = String(Double(num1)! - Double(equalTemp)!)
             num2 = ""
         case "÷":
-            if (equalTemp == String()) {
+            if (equalTemp == "") {
                 equalTemp = num1
             }
-            num1 = String(Double(num1)! / Double(num2)!)
+            num1 = String(Double(num1)! / Double(equalTemp)!)
             num2 = ""
         case "X":
-            if (equalTemp == String()) {
+            if (equalTemp == "") {
                 equalTemp = num1
             }
-            num1 = String(Double(num1)! * Double(num2)!)
+            num1 = String(Double(num1)! * Double(equalTemp)!)
             num2 = ""
-        //        case "":
         default:
             print("Default case triggered in equalCalc()")
         }
@@ -420,14 +436,45 @@ class CalculatorViewController: UIViewController {
         num2 = ""
         operand = ""
         displayScreen.text = "0"
-        equalTemp = String()
+        equalTemp = ""
         eqPress = false
     }
+    
+//    func removeDecimal(_ val: String) -> String {
+//        var output = val
+//        // Checks to see if there are any numbers after the decimal
+//        if val.contains(".") {
+//            // Adds the display text to an Array
+//            var displayTextArray = [Character]()
+//            for char in displayScreen.text! {
+//                displayTextArray.append(char)
+//            }
+//            let i = displayTextArray.firstIndex(of: ".")! + 1
+//            if (
+//                displayTextArray[i...].contains("1") ||
+//                displayTextArray[i...].contains("2") ||
+//                displayTextArray[i...].contains("3") ||
+//                displayTextArray[i...].contains("4") ||
+//                displayTextArray[i...].contains("5") ||
+//                displayTextArray[i...].contains("6") ||
+//                displayTextArray[i...].contains("7") ||
+//                displayTextArray[i...].contains("8") ||
+//                displayTextArray[i...].contains("9")
+//                ) {
+//                print("Contains some numbers")
+//                displayTextArray.removeSubrange((i - 1)...)
+//                output = ""
+//                for char in displayTextArray {
+//                    output += String(char)
+//                }
+//                print("The new string ->",output)
+//            }
+//        }
+//        return output
+//    }
 }
 
 /*
  Things to fix:
  - Calulations result in decimal values even when 4.0
- - Resizing font of display to accomodate larger numbers
- - multiCalc -> should it show the symbol pressed?
  */
