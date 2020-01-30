@@ -14,14 +14,16 @@ class CalculatorViewController: UIViewController {
     var num1 = ""
     var num2 = ""
     var operand = ""
-    var equalTemp = Int()
+    var equalTemp = String()
     var eqPress = false
     
+    let displayPadding = UILabel()
     let displayScreen = UILabel()
     let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(displayPadding)
         view.addSubview(displayScreen)
         view.addSubview(button)
         
@@ -56,11 +58,11 @@ class CalculatorViewController: UIViewController {
     
     func styleSubviews() {
         /*
-         Display height = 30% of view
-         Button section height = 70%
-         Each button = 20 % of width, with 4% width padding on each side
-         Button height could be 10% of height and 4% width padding
-         */
+        Display height = 30% of view
+        Button section height = 70%
+        Each button = 20 % of width, with 4% width padding on each side
+        Button height could be 10% of height and 4% width padding
+        */
         
         // Gets 1% of height and width
         let viewHeight = self.view.frame.height / 100
@@ -73,12 +75,18 @@ class CalculatorViewController: UIViewController {
         displayScreen.text = "0"
         displayScreen.textColor = #colorLiteral(red: 0.3411012292, green: 0.3455565274, blue: 0.3205627799, alpha: 1)
         displayScreen.textAlignment = .right
-        displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 15)
+        displayScreen.font = UIFont(name: "Futura-Medium", size: viewHeight * 10)
         
         displayScreen.topToSuperview()
         displayScreen.leadingToSuperview()
         displayScreen.height(viewHeight * 30)
-        displayScreen.widthToSuperview()
+        displayScreen.width(viewWidth * 95)
+        
+        displayPadding.backgroundColor = #colorLiteral(red: 0.5557582974, green: 0.6102099419, blue: 0.468695879, alpha: 1)
+        displayPadding.topToSuperview()
+        displayPadding.leadingToTrailing(of: displayScreen)
+        displayPadding.height(viewHeight * 30)
+        displayPadding.widthToSuperview()
         
         // COL 1
         
@@ -175,7 +183,251 @@ class CalculatorViewController: UIViewController {
         let calcBtns = ["C", "", "", "÷", "7", "8", "9", "X", "4", "5", "6", "-", "1", "2", "3", "+", "0", "", ".", "="]
         
         let idx = Int(sender?.tag?.description ?? "-1")
-        
-        displayScreen.text = calcBtns[idx! - 1]
+        let keyVal = calcBtns[idx! - 1]
+                
+        if (keyVal == "C" || keyVal == "÷" || keyVal == "X" || keyVal == "-" || keyVal == "+" || keyVal == "=" || keyVal == ".") {
+            symPress(keyVal)
+        } else {
+            numPress(keyVal)
+        }
+        // If NaN (for example, from 0/0) clears the calc and displays a message)
+        if (displayScreen.text == "NaN") {
+            clear()
+            displayScreen.text = "-Undefined-"
+        }
+        // Debugging Logs:
+        print("Equation: \(num1)  \(operand) \(num2)")
+        print("Equal temp num: \(equalTemp) eqPress: \(eqPress)")
+        print("---------------")
+    }
+    
+    // If a number is pressed
+    func numPress(_ inputNum: String) {
+        // Resets the equal temp number on any number press
+        equalTemp = String()
+        // If equal was just pressed, followed by a number, clears the calc
+        if eqPress {
+            clear()
+        }
+        // Sets num1
+        if operand == "" {
+            // Makes it so you can"t enter 00000
+            if inputNum == "0" && num1 == "0" {
+                num1 = ""
+                // Caps the input length at 7 digits
+            } else if num1.count < 7 {
+                if num1 == "0" {
+                    num1 = ""
+                }
+                num1 += inputNum
+                displayScreen.text = num1
+            }
+            // Sets num2
+        } else {
+            if inputNum == "0" && num2 == "0" {
+                num2 = ""
+            } else if num2.count < 7 {
+                if num2 == "0" {
+                    num2 = ""
+                }
+                num2 += inputNum
+                displayScreen.text = num2
+            }
+        }
+    }
+    
+    // If a symbol is pressed
+    func symPress(_ inputSym: String) {
+        // If the sym is not =, then reset the equal values
+        if inputSym != "=" {
+            equalTemp = String()
+            eqPress = false
+        }
+        // Switch cases for various symbols
+        switch inputSym {
+        case "+":
+            // Only allows you to input operands if num1 has already been defined
+            // Otherwise, you can press an operand, and then a num, which can cause weird results
+            if num1 != "" {
+                // If num2 isn"t defined yet, set the operand and do nothing else
+                if num2 == "" {
+                    displayScreen.text = "+"
+                    operand = "+"
+                    // If it has been defined, calculate the last 2 numbers, display that result,
+                    // place the result in num1, and clear num2
+                } else {
+                    multiCalc(operand)
+                    displayScreen.text = num1
+                    operand = "+"
+                }
+            }
+        case "-":
+            if num1 != "" {
+                if num2 == "" {
+                    displayScreen.text = "-"
+                    operand = "-"
+                } else {
+                    multiCalc(operand)
+                    displayScreen.text = num1
+                    operand = "-"
+                }
+            }
+        case "÷":
+            if (num1 != "") {
+                if (num2 == "") {
+                    displayScreen.text = "÷"
+                    operand = "÷"
+                } else {
+                    multiCalc(operand)
+                    displayScreen.text = num1
+                    operand = "÷"
+                }
+            }
+        case "X":
+            if (num1 != "") {
+                if (num2 == "") {
+                    displayScreen.text = "X"
+                    operand = "X"
+                } else {
+                    multiCalc(operand)
+                    displayScreen.text = num1
+                    operand = "X"
+                }
+            }
+        case "=":
+            // If either input is "." --> display "Illegal use of decimal"
+            if (num1 == "." || num2 == ".") {
+                clear()
+                displayScreen.text = "-Invalid Use of Decimal-"
+            }
+            // Records a boolean for if = was the last sym pressed
+            eqPress = true
+            // If neither num1 nor num2 have been defined yet, do nothing
+            if (num1 == "" && num2 == "") {
+                // If num2 is undefined, calculate using num1 [operand] num1
+            } else if (num2 == "") {
+                displayScreen.text = equalCalc(operand)
+                // If num2 has been defined, record num2 in the equal sign"s temp num holder, then calculate
+            } else {
+                equalTemp = num2
+                displayScreen.text = mathCalc(operand)
+            }
+        case ".":
+            // If operand is undefined, then apply decimal to num1
+            if (operand == "") {
+                // Check to make sure num1 doesn"t already have a decimal
+                if !num1.contains(".") {
+                    num1 += "."
+                    displayScreen.text = num1
+                }
+            } else {
+                if !num2.contains(".") {
+                    num2 += "."
+                    displayScreen.text = num2
+                }
+            }
+        // Clears the calc and all its variables if btn C is pressed
+        case "C":
+            clear()
+        default:
+            print("Default case triggered in symPress()")
+            
+        }
+    }
+    
+    // Normal calculations --> [] + [] =
+    func mathCalc(_ sym: String) -> String {
+        switch sym {
+        case "+":
+            // Calculates num1 [operand] num2, stores that value
+            // in num1 and displays it, clears num2 for use in future calculations
+            num1 = String(Double(num1)! + Double(num2)!)
+            num2 = ""
+        case "-":
+            num1 = String(Double(num1)! - Double(num2)!)
+            num2 = ""
+        case "÷":
+            num1 = String(Double(num1)! / Double(num2)!)
+            num2 = ""
+        case "X":
+            num1 = String(Double(num1)! * Double(num2)!)
+            num2 = ""
+        default:
+            print("Default case triggered in mathCalc()")
+        }
+        return num1
+    }
+    
+    // [] + [] + []... =
+    func multiCalc(_ sym: String) {
+        switch sym {
+        case "+":
+            num1 = String(Double(num1)! + Double(num2)!)
+            num2 = ""
+        case "-":
+            num1 = String(Double(num1)! - Double(num2)!)
+            num2 = ""
+        case "÷":
+            num1 = String(Double(num1)! / Double(num2)!)
+            num2 = ""
+        case "X":
+            num1 = String(Double(num1)! * Double(num2)!)
+            num2 = ""
+        default:
+            print("Default case triggered in multiCalc()")
+        }
+    }
+    
+    // For when equal sign is pressed multiple times --> [] + = = = OR [] + [] = = =
+    func equalCalc(_ sym: String) -> String {
+        switch sym {
+        case "+":
+            // If equal"s temp num has not been defined yet, define it
+            // Otherwise, keep performing calculations using the old value
+            if (equalTemp == String()) {
+                equalTemp = num1
+            }
+            num1 = String(Double(num1)! + Double(num2)!)
+            num2 = ""
+        case "-":
+            if (equalTemp == String()) {
+                equalTemp = num1
+            }
+            num1 = String(Double(num1)! - Double(num2)!)
+            num2 = ""
+        case "÷":
+            if (equalTemp == String()) {
+                equalTemp = num1
+            }
+            num1 = String(Double(num1)! / Double(num2)!)
+            num2 = ""
+        case "X":
+            if (equalTemp == String()) {
+                equalTemp = num1
+            }
+            num1 = String(Double(num1)! * Double(num2)!)
+            num2 = ""
+        //        case "":
+        default:
+            print("Default case triggered in equalCalc()")
+        }
+        return num1
+    }
+    
+    // Resets all of the calculator"s values to their default state
+    func clear() {
+        num1 = ""
+        num2 = ""
+        operand = ""
+        displayScreen.text = "0"
+        equalTemp = String()
+        eqPress = false
     }
 }
+
+/*
+ Things to fix:
+ - Calulations result in decimal values even when 4.0
+ - Resizing font of display to accomodate larger numbers
+ - multiCalc -> should it show the symbol pressed?
+ */
