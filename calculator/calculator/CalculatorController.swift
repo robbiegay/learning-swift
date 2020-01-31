@@ -21,7 +21,6 @@ class CalculatorViewController: UIViewController {
     
     let displayPadding = UILabel()
     let displayScreen = UILabel()
-    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,95 +92,31 @@ class CalculatorViewController: UIViewController {
         displayPadding.height(viewHeight * 30)
         displayPadding.widthToSuperview()
         
-        // COL 1
-        
-        view.viewWithTag(1)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(1)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
-        view.viewWithTag(1)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
-        
-        view.viewWithTag(2)!.leadingToTrailing(of: view.viewWithTag(1)!, offset: viewWidth * 4)
-        view.viewWithTag(2)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
-        view.viewWithTag(2)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
-        
-        view.viewWithTag(3)!.leadingToTrailing(of: view.viewWithTag(2)!, offset: viewWidth * 4)
-        view.viewWithTag(3)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
-        view.viewWithTag(3)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
-        
-        view.viewWithTag(4)!.leadingToTrailing(of: view.viewWithTag(3)!, offset: viewWidth * 4)
-        view.viewWithTag(4)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
-        view.viewWithTag(4)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
-        
-        // COL 2
-        
-        view.viewWithTag(5)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(5)!.topToBottom(of: view.viewWithTag(1)!, offset: viewHeight * 2.5)
-        view.viewWithTag(5)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(6)!.leadingToTrailing(of: view.viewWithTag(5)!, offset: viewWidth * 4)
-        view.viewWithTag(6)!.topToBottom(of: view.viewWithTag(2)!, offset: viewHeight * 2.5)
-        view.viewWithTag(6)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(7)!.leadingToTrailing(of: view.viewWithTag(6)!, offset: viewWidth * 4)
-        view.viewWithTag(7)!.topToBottom(of: view.viewWithTag(3)!, offset: viewHeight * 2.5)
-        view.viewWithTag(7)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(8)!.leadingToTrailing(of: view.viewWithTag(7)!, offset: viewWidth * 4)
-        view.viewWithTag(8)!.topToBottom(of: view.viewWithTag(4)!, offset: viewHeight * 2.5)
-        view.viewWithTag(8)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
-        
-        // COL 3
-        
-        view.viewWithTag(9)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(9)!.topToBottom(of: view.viewWithTag(5)!, offset: viewHeight * 2.5)
-        view.viewWithTag(9)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(10)!.leadingToTrailing(of: view.viewWithTag(9)!, offset: viewWidth * 4)
-        view.viewWithTag(10)!.topToBottom(of: view.viewWithTag(6)!, offset: viewHeight * 2.5)
-        view.viewWithTag(10)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(11)!.leadingToTrailing(of: view.viewWithTag(10)!, offset: viewWidth * 4)
-        view.viewWithTag(11)!.topToBottom(of: view.viewWithTag(7)!, offset: viewHeight * 2.5)
-        view.viewWithTag(11)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(12)!.leadingToTrailing(of: view.viewWithTag(11)!, offset: viewWidth * 4)
-        view.viewWithTag(12)!.topToBottom(of: view.viewWithTag(8)!, offset: viewHeight * 2.5)
-        view.viewWithTag(12)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
-        
-        // COL 4
-        
-        view.viewWithTag(13)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(13)!.topToBottom(of: view.viewWithTag(9)!, offset: viewHeight * 2.5)
-        view.viewWithTag(13)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(14)!.leadingToTrailing(of: view.viewWithTag(13)!, offset: viewWidth * 4)
-        view.viewWithTag(14)!.topToBottom(of: view.viewWithTag(10)!, offset: viewHeight * 2.5)
-        view.viewWithTag(14)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(15)!.leadingToTrailing(of: view.viewWithTag(14)!, offset: viewWidth * 4)
-        view.viewWithTag(15)!.topToBottom(of: view.viewWithTag(11)!, offset: viewHeight * 2.5)
-        view.viewWithTag(15)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(16)!.leadingToTrailing(of: view.viewWithTag(15)!, offset: viewWidth * 4)
-        view.viewWithTag(16)!.topToBottom(of: view.viewWithTag(12)!, offset: viewHeight * 2.5)
-        view.viewWithTag(16)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
-        
-        // COL 5
-        
-        view.viewWithTag(17)!.leadingToSuperview(offset: viewWidth * 4)
-        view.viewWithTag(17)!.topToBottom(of: view.viewWithTag(13)!, offset: viewHeight * 2.5)
-        view.viewWithTag(17)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(18)!.leadingToTrailing(of: view.viewWithTag(17)!, offset: viewWidth * 4)
-        view.viewWithTag(18)!.topToBottom(of: view.viewWithTag(14)!, offset: viewHeight * 2.5)
-        view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(19)!.leadingToTrailing(of: view.viewWithTag(18)!, offset: viewWidth * 4)
-        view.viewWithTag(19)!.topToBottom(of: view.viewWithTag(15)!, offset: viewHeight * 2.5)
-        view.viewWithTag(19)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
-        
-        view.viewWithTag(20)!.leadingToTrailing(of: view.viewWithTag(19)!, offset: viewWidth * 4)
-        view.viewWithTag(20)!.topToBottom(of: view.viewWithTag(16)!, offset: viewHeight * 2.5)
-        view.viewWithTag(20)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
+        var idx = 1
+        for _ in calcBtns {
+            // Sets leading to Superview or the button left of it
+            if idx == 1 || idx == 5 || idx == 9 || idx == 13 || idx == 17 {
+                view.viewWithTag(idx)!.leadingToSuperview(offset: viewWidth * 4)
+            } else {
+                view.viewWithTag(idx)!.leadingToTrailing(of: view.viewWithTag(idx - 1)!, offset: viewWidth * 4)
+            }
+            // Sets top to displayScreen or the button above it
+            if idx < 5 {
+                view.viewWithTag(idx)!.topToBottom(of: displayScreen, offset: viewHeight * 2.5)
+            } else {
+                view.viewWithTag(idx)!.topToBottom(of: view.viewWithTag(idx - 4)!, offset: viewHeight * 2.5)
+            }
+            // Sets the button colors
+            if idx < 4 {
+                view.viewWithTag(idx)!.backgroundColor = #colorLiteral(red: 0.9821309447, green: 0.4039210081, blue: 0.36013937, alpha: 1)
+            } else if idx % 4 == 0 {
+                view.viewWithTag(idx)!.backgroundColor = #colorLiteral(red: 0.992130816, green: 0.6051428914, blue: 0.3372822106, alpha: 1)
+            } else {
+                view.viewWithTag(idx)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
+            }
+            // Increments the idx value
+            idx += 1
+        }
     }
     
     @objc func handleClick(_ sender: AnyObject?) {
@@ -223,11 +158,6 @@ class CalculatorViewController: UIViewController {
         } else {
             view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         }
-        
-        // Debugging Logs:
-        print("Equation: \(num1)  \(operand) \(num2)")
-        print("Equal temp num: \(equalTemp) eqPress: \(eqPress)")
-        print("---------------")
     }
     
     // If a number is pressed
@@ -447,7 +377,7 @@ class CalculatorViewController: UIViewController {
         // RED
         // Raises the color's number until 0.9
         if redColor < 0.9 && redForward {
-            redColor += 0.05
+            redColor += 0.09
         // The starts lowering the color's value until 0.1
         // These raising and lowering continue to cycle until the timer is stopped
         } else {
@@ -456,14 +386,14 @@ class CalculatorViewController: UIViewController {
         }
         // GREEN
         if greenColor < 0.9 && greenForward {
-            greenColor += 0.01
+            greenColor += 0.09
         } else {
             greenForward = greenColor <= 0.1
-            greenColor -= 0.05
+            greenColor -= 0.09
         }
         // BLUE
         if blueColor < 0.9 && blueForward {
-            blueColor += 0.05
+            blueColor += 0.09
         } else {
             blueForward = blueColor <= 0.1
             blueColor -= 0.05
@@ -490,6 +420,4 @@ class CalculatorViewController: UIViewController {
         displayColorTimer?.invalidate()
         textColorTimer?.invalidate()
     }
-    // Build 1 -> 520 lines of code (not counting comments)
-    // Build 2 -> 493
 }
