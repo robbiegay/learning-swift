@@ -386,14 +386,14 @@ class CalculatorViewController: UIViewController {
         }
         // GREEN
         if greenColor < 0.9 && greenForward {
-            greenColor += 0.1
+            greenColor += 0.09
         } else {
             greenForward = greenColor <= 0.1
             greenColor -= 0.09
         }
         // BLUE
         if blueColor < 0.9 && blueForward {
-            blueColor += 0.1
+            blueColor += 0.09
         } else {
             blueForward = blueColor <= 0.1
             blueColor -= 0.05
