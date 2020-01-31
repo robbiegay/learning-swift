@@ -21,7 +21,6 @@ class CalculatorViewController: UIViewController {
     
     let displayPadding = UILabel()
     let displayScreen = UILabel()
-    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,11 +158,6 @@ class CalculatorViewController: UIViewController {
         } else {
             view.viewWithTag(18)!.backgroundColor = #colorLiteral(red: 0.3576321006, green: 0.3255228996, blue: 0.3168733418, alpha: 1)
         }
-        
-        // Debugging Logs:
-        print("Equation: \(num1)  \(operand) \(num2)")
-        print("Equal temp num: \(equalTemp) eqPress: \(eqPress)")
-        print("---------------")
     }
     
     // If a number is pressed
@@ -383,7 +377,7 @@ class CalculatorViewController: UIViewController {
         // RED
         // Raises the color's number until 0.9
         if redColor < 0.9 && redForward {
-            redColor += 0.05
+            redColor += 0.09
         // The starts lowering the color's value until 0.1
         // These raising and lowering continue to cycle until the timer is stopped
         } else {
@@ -392,14 +386,14 @@ class CalculatorViewController: UIViewController {
         }
         // GREEN
         if greenColor < 0.9 && greenForward {
-            greenColor += 0.01
+            greenColor += 0.1
         } else {
             greenForward = greenColor <= 0.1
-            greenColor -= 0.05
+            greenColor -= 0.09
         }
         // BLUE
         if blueColor < 0.9 && blueForward {
-            blueColor += 0.05
+            blueColor += 0.1
         } else {
             blueForward = blueColor <= 0.1
             blueColor -= 0.05

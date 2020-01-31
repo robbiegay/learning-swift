@@ -14,7 +14,7 @@
 		4551560723E1D1620048FF5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4551560623E1D1620048FF5B /* Assets.xcassets */; };
 		4551560A23E1D1620048FF5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4551560923E1D1620048FF5B /* Preview Assets.xcassets */; };
 		4551560D23E1D1620048FF5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4551560B23E1D1620048FF5B /* LaunchScreen.storyboard */; };
-		4551561523E1D68C0048FF5B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551561423E1D68C0048FF5B /* CalculatorViewController.swift */; };
+		4551561523E1D68C0048FF5B /* CalculatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551561423E1D68C0048FF5B /* CalculatorController.swift */; };
 		47288D286D0A1E203623DAAE /* libPods-calculator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA27BB5DDC048547457376D3 /* libPods-calculator.a */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,7 @@
 		4551560923E1D1620048FF5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4551560C23E1D1620048FF5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4551560E23E1D1620048FF5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4551561423E1D68C0048FF5B /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
+		4551561423E1D68C0048FF5B /* CalculatorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorController.swift; sourceTree = "<group>"; };
 		45DF433023E2176000A5CD3F /* TinyConstraints.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TinyConstraints.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA27BB5DDC048547457376D3 /* libPods-calculator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-calculator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -102,7 +102,7 @@
 			children = (
 				4551560023E1D1600048FF5B /* AppDelegate.swift */,
 				4551560223E1D1600048FF5B /* SceneDelegate.swift */,
-				4551561423E1D68C0048FF5B /* CalculatorViewController.swift */,
+				4551561423E1D68C0048FF5B /* CalculatorController.swift */,
 				4551560623E1D1620048FF5B /* Assets.xcassets */,
 				4551560B23E1D1620048FF5B /* LaunchScreen.storyboard */,
 				4551560E23E1D1620048FF5B /* Info.plist */,
@@ -227,7 +227,7 @@
 			files = (
 				4551560123E1D1600048FF5B /* AppDelegate.swift in Sources */,
 				4551560323E1D1600048FF5B /* SceneDelegate.swift in Sources */,
-				4551561523E1D68C0048FF5B /* CalculatorViewController.swift in Sources */,
+				4551561523E1D68C0048FF5B /* CalculatorController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
