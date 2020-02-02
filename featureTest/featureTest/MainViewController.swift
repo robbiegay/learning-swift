@@ -15,13 +15,15 @@ class MainViewController: UIViewController {
      -Button-
      -Segmented Text-
      -Text Field-
-     Slider
-     Switch
-     Activity Indicator
-     Progress View
+     -Slider-
+     -Switch-
+     
      Table View
      Table View Cell
-     Iamge View
+     Scroll View
+     
+     Activity Indicator
+     Progress View
      
      TinyConstraint Stack
      */
@@ -32,15 +34,18 @@ class MainViewController: UIViewController {
     let testTextField = UITextField()
     let testTextView = UITextView()
     let testSlider = UISlider()
-    
+    let testSwitch = UISwitch()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(testLabel)
         view.addSubview(testButton)
         view.addSubview(testSeg)
         view.addSubview(testTextField)
         view.addSubview(testTextView)
         view.addSubview(testSlider)
+        view.addSubview(testSwitch)
         
         styleSubviews()
     }
@@ -54,7 +59,7 @@ class MainViewController: UIViewController {
         testLabel.backgroundColor = #colorLiteral(red: 0.3319281638, green: 0.4998449683, blue: 0.4219300747, alpha: 1)
         testLabel.leadingToSuperview()
         testLabel.topToSuperview()
-        testLabel.height(150)
+        testLabel.height(100)
         testLabel.trailingToSuperview()
         
         testButton.setTitle("This is a UIButton", for: .normal)
@@ -86,7 +91,7 @@ class MainViewController: UIViewController {
         testTextField.layer.cornerRadius = 10
         testTextField.layer.masksToBounds = true
         testTextField.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        testTextField.placeholder = "Type here"
+        testTextField.placeholder = "Tell me a story..."
         testTextField.addTarget(self, action: #selector(handleTextChange), for: .allEvents)
         
         testTextView.leadingToSuperview(offset: 50)
@@ -95,7 +100,7 @@ class MainViewController: UIViewController {
         testTextView.layer.borderWidth = 3
         testTextView.layer.cornerRadius = 10
         testTextView.layer.masksToBounds = true
-        testTextView.height(150)
+        testTextView.height(75)
         testTextView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         testSlider.leadingToSuperview(offset:50)
@@ -104,6 +109,10 @@ class MainViewController: UIViewController {
         testSlider.isContinuous = true
         testSlider.setValue(0.5, animated: true)
         testSlider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
+        
+        testSwitch.leadingToSuperview(offset: 50)
+        testSwitch.topToBottom(of: testSlider, offset: 50)
+        testSwitch.addTarget(self, action: #selector(handleSwitch), for: .valueChanged)
     }
     
     @objc func handleButtonClick() {
@@ -123,6 +132,10 @@ class MainViewController: UIViewController {
     @objc func handleSliderChange() {
         let value = testSlider.value
         view.backgroundColor = UIColor(displayP3Red: 200/255, green: CGFloat((255 * value)/255), blue: CGFloat((255 * value)/255), alpha: 1)
+    }
+    
+    @objc func handleSwitch() {
+        view.backgroundColor = testSwitch.isOn ? #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1) : #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
     }
     
 }
