@@ -22,8 +22,10 @@ class MainViewController: UIViewController {
      Table View Cell
      Scroll View
      
-     Activity Indicator
-     Progress View
+     Changing views between pages
+     
+     -Activity Indicator-
+     -Progress View-
      
      TinyConstraint Stack
      */
@@ -35,6 +37,13 @@ class MainViewController: UIViewController {
     let testTextView = UITextView()
     let testSlider = UISlider()
     let testSwitch = UISwitch()
+    
+    let testProgressButton = UIButton()
+    let testActivity = UIActivityIndicatorView()
+    let testProgress = UIProgressView()
+    
+    var progressVal: Float = 0.0
+    var progressDone = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +55,9 @@ class MainViewController: UIViewController {
         view.addSubview(testTextView)
         view.addSubview(testSlider)
         view.addSubview(testSwitch)
+        view.addSubview(testProgressButton)
+        view.addSubview(testActivity)
+        view.addSubview(testProgress)
         
         styleSubviews()
     }
@@ -113,6 +125,29 @@ class MainViewController: UIViewController {
         testSwitch.leadingToSuperview(offset: 50)
         testSwitch.topToBottom(of: testSlider, offset: 50)
         testSwitch.addTarget(self, action: #selector(handleSwitch), for: .valueChanged)
+        
+        testProgressButton.setTitle("Make Progress", for: .normal)
+        testProgressButton.topToBottom(of: testSwitch, offset: 50)
+        testProgressButton.leadingToSuperview(offset: 50)
+        testProgressButton.centerXToSuperview()
+        testProgressButton.layer.borderWidth = 3
+        testProgressButton.titleEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        testProgressButton.layer.cornerRadius = 10
+        testProgressButton.layer.masksToBounds = true
+        testProgressButton.addTarget(self, action: #selector(handleProgressClick), for: .touchUpInside)
+        testProgressButton.backgroundColor = #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1)
+        
+        testActivity.leadingToSuperview(offset: 50)
+        testActivity.topToBottom(of: testProgressButton, offset: 50)
+        testActivity.centerXToSuperview()
+        testActivity.color = #colorLiteral(red: 0.0003578882315, green: 0.4713798165, blue: 0.9911743999, alpha: 1)
+        testActivity.startAnimating()
+        
+        testProgress.leadingToSuperview(offset: 50)
+        testProgress.topToBottom(of: testActivity, offset: 50)
+        testProgress.centerXToSuperview()
+        testProgress.progress = progressVal
+        
     }
     
     @objc func handleButtonClick() {
@@ -136,6 +171,26 @@ class MainViewController: UIViewController {
     
     @objc func handleSwitch() {
         view.backgroundColor = testSwitch.isOn ? #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1) : #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1)
+    }
+    
+    @objc func handleProgressClick() {
+        if progressVal >= 1.0 {
+            progressDone = true
+            testProgressButton.setTitle("Decrease Progress", for: .normal)
+            testProgressButton.backgroundColor = #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1)
+            testActivity.stopAnimating()
+        } else if progressVal <= 0.0 {
+            progressDone = false
+            testProgressButton.setTitle("Make Progress", for: .normal)
+            testProgressButton.backgroundColor = #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1)
+            testActivity.startAnimating()
+        }
+        if progressDone {
+            progressVal -= 0.05
+        } else {
+            progressVal += 0.05
+        }
+        testProgress.progress = progressVal
     }
     
 }
