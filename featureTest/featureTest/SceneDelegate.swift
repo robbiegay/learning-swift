@@ -20,18 +20,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
+        
+        // --> Various page views
         let mainView =
             MainViewController()
-        
         let tableView = ViewController()
         let fruitTabelView = FruitTableViewController()
+                
+        // --> Adding nav bars to two of the pages
+        let housematesNavController = UINavigationController(rootViewController: tableView)
+        let fruitNavController = UINavigationController(rootViewController: fruitTabelView)
+            
+        // --> Creating a tabBarController
+        let tabBarController = UITabBarController()
+        // --> Adding the veiws to the tabBar
+        tabBarController.setViewControllers([mainView, housematesNavController, fruitNavController], animated: true)
+        // --> Adding each tab bar items label and icon
+        // mainView.tabBarItem = UITabBarItem(title: "Feature Test", image: #imageLiteral(resourceName: "Moolathon Logo final_logo only black"), tag: 0)
+        mainView.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        housematesNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
+        fruitNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 2)
         
-        let navController = UINavigationController(rootViewController: fruitTabelView)
-
+        // --> Placing the tab bar in the window's rootViewController
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = navController // mainView
+            window.rootViewController = tabBarController
             self.window = window
             window.makeKeyAndVisible()
         }
