@@ -14,6 +14,7 @@
 		4526EFCD23E61423005D1D61 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4526EFCB23E61423005D1D61 /* LaunchScreen.storyboard */; };
 		4526EFD523E61449005D1D61 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526EFD423E61449005D1D61 /* MainViewController.swift */; };
 		45A88B1D23F4425B00FA3317 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A88B1C23F4425B00FA3317 /* ViewController.swift */; };
+		45E9A94123F47CD20092D7E7 /* FruitTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E9A94023F47CD20092D7E7 /* FruitTableViewController.swift */; };
 		BD737462C1F7CBB7C5D4708D /* libPods-featureTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4C340D0BD7B3312802F2BB2 /* libPods-featureTest.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		4526EFCE23E61423005D1D61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4526EFD423E61449005D1D61 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		45A88B1C23F4425B00FA3317 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "/Users/robbiegay/sites/swift-learning/featureTest/featureTest/ViewController.swift"; sourceTree = "<absolute>"; };
+		45E9A94023F47CD20092D7E7 /* FruitTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitTableViewController.swift; sourceTree = "<group>"; };
 		A90ABFD861738C7B08EE0229 /* Pods-featureTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-featureTest.debug.xcconfig"; path = "Target Support Files/Pods-featureTest/Pods-featureTest.debug.xcconfig"; sourceTree = "<group>"; };
 		F4C340D0BD7B3312802F2BB2 /* libPods-featureTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-featureTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				45A88B1C23F4425B00FA3317 /* ViewController.swift */,
 				4526EFC023E61421005D1D61 /* AppDelegate.swift */,
 				4526EFC223E61421005D1D61 /* SceneDelegate.swift */,
+				45E9A94023F47CD20092D7E7 /* FruitTableViewController.swift */,
 				4526EFD423E61449005D1D61 /* MainViewController.swift */,
 				4526EFC623E61423005D1D61 /* Assets.xcassets */,
 				4526EFCB23E61423005D1D61 /* LaunchScreen.storyboard */,
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45E9A94123F47CD20092D7E7 /* FruitTableViewController.swift in Sources */,
 				4526EFD523E61449005D1D61 /* MainViewController.swift in Sources */,
 				4526EFC123E61421005D1D61 /* AppDelegate.swift in Sources */,
 				45A88B1D23F4425B00FA3317 /* ViewController.swift in Sources */,

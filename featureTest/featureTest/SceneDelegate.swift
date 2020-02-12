@@ -24,8 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             MainViewController()
         
         let tableView = ViewController()
+        let fruitTabelView = FruitTableViewController()
         
-        let navController = UINavigationController(rootViewController: tableView)
+        let navController = UINavigationController(rootViewController: fruitTabelView)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
