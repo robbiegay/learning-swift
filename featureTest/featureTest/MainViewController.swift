@@ -44,6 +44,9 @@ class MainViewController: UIViewController {
     
     var progressVal: Float = 0.0
     var progressDone = false
+    
+    let alert = UIAlertController(title: "You pressed the button", message: "Do you want to change the color?", preferredStyle: .alert) // Can switch between alert and action sheet
+    
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +66,14 @@ class MainViewController: UIViewController {
     }
     
     func styleSubviews() {
+        alert.addAction(UIAlertAction(title: "Yes (default)", style: .default, handler: { (_) in
+            self.view.backgroundColor = self.view.backgroundColor == #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1) ? #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1) : #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1)
+            self.testButton.backgroundColor = self.view.backgroundColor == #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1) ? #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1) : #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1)
+        }))
+        alert.addAction(UIAlertAction(title: "No (cancel)", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete (destructive)", style: .destructive, handler: nil))
+        // It appears that the .cancel option allways appears last
+        
         view.backgroundColor = #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1)
         
         testLabel.text = "This is a UILabel"
@@ -152,43 +163,42 @@ class MainViewController: UIViewController {
     
     var i = 0
     @objc func handleButtonClick() {
-        view.backgroundColor = view.backgroundColor == #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1) ? #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1) : #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1)
-        testButton.backgroundColor = view.backgroundColor == #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1) ? #colorLiteral(red: 0.8044971824, green: 0.2484204769, blue: 0.2948410213, alpha: 1) : #colorLiteral(red: 0.9499809146, green: 0.4625762105, blue: 0.1792234778, alpha: 1)
         
-        // Haptics Test
-        i += 1
-        print("Running \(i)")
-
-        switch i {
-        case 1:
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.error)
-
-        case 2:
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.success)
-
-        case 3:
-            let generator = UINotificationFeedbackGenerator()
-            generator.notificationOccurred(.warning)
-
-        case 4:
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
-
-        case 5:
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
-
-        case 6:
-            let generator = UIImpactFeedbackGenerator(style: .heavy)
-            generator.impactOccurred()
-
-        default:
-            let generator = UISelectionFeedbackGenerator()
-            generator.selectionChanged()
-            i = 0
-        }
+        self.present(alert, animated: true, completion: nil)
+//        // Haptics Test
+//        i += 1
+//        print("Running \(i)")
+//
+//        switch i {
+//        case 1:
+//            let generator = UINotificationFeedbackGenerator()
+//            generator.notificationOccurred(.error)
+//
+//        case 2:
+//            let generator = UINotificationFeedbackGenerator()
+//            generator.notificationOccurred(.success)
+//
+//        case 3:
+//            let generator = UINotificationFeedbackGenerator()
+//            generator.notificationOccurred(.warning)
+//
+//        case 4:
+//            let generator = UIImpactFeedbackGenerator(style: .light)
+//            generator.impactOccurred()
+//
+//        case 5:
+//            let generator = UIImpactFeedbackGenerator(style: .medium)
+//            generator.impactOccurred()
+//
+//        case 6:
+//            let generator = UIImpactFeedbackGenerator(style: .heavy)
+//            generator.impactOccurred()
+//
+//        default:
+//            let generator = UISelectionFeedbackGenerator()
+//            generator.selectionChanged()
+//            i = 0
+//        }
     }
     
     @objc func handleSegClick() {
