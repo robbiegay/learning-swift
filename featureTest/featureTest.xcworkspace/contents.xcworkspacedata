@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/robbiegay/sites/swift-learning/featureTest/featureTest/TableViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:featureTest.xcodeproj">
    </FileRef>
    <FileRef

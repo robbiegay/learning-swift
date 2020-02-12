@@ -23,12 +23,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainView =
             MainViewController()
         
-//        let tableView = TableViewController()
+        let tableView = ViewController()
+        
+        let navController = UINavigationController(rootViewController: tableView)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = mainView
+            window.rootViewController = navController // mainView
             self.window = window
             window.makeKeyAndVisible()
         }

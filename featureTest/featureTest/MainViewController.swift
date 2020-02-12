@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
     var progressVal: Float = 0.0
     var progressDone = false
     
-    let alert = UIAlertController(title: "You pressed the button", message: "Do you want to change the color?", preferredStyle: .alert) // Can switch between alert and action sheet
+    let alert = UIAlertController(title: "You pressed the button", message: "Do you want to change the color?", preferredStyle: .actionSheet) // Can switch between .alert and .actionSheet
     
         
     override func viewDidLoad() {
