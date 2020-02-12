@@ -30,6 +30,8 @@ class MainViewController: UIViewController {
      TinyConstraint Stack
      */
     
+//    let scrollView = UIScrollView()
+    
     let testLabel = UILabel()
     let testButton = UIButton()
     let testSeg = UISegmentedControl()
@@ -50,6 +52,20 @@ class MainViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+//        view.addSubview(scrollView)
+//        scrollView.edgesToSuperview()
+//        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: scrollView.frame.size.height)
+        
+//        scrollView.addSubview(testLabel)
+//        scrollView.addSubview(testButton)
+//        scrollView.addSubview(testSeg)
+//        scrollView.addSubview(testTextField)
+//        scrollView.addSubview(testTextView)
+//        scrollView.addSubview(testSlider)
+//        scrollView.addSubview(testSwitch)
+//        scrollView.addSubview(testProgressButton)
+//        scrollView.addSubview(testActivity)
+//        scrollView.addSubview(testProgress)
         
         view.addSubview(testLabel)
         view.addSubview(testButton)
