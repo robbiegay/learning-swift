@@ -9,12 +9,19 @@ import UIKit
 import TinyConstraints
 
 class ViewController: UITableViewController {
+    // Try to write code that allows you to change only these top level variables, and everything below works automatically
     
-    let humans = ["Robbie", "Anna"]
-    let cats = ["Waffles", "Poppy"]
+    let twoDimensionalArray = [
+        ["Robbie", "Anna"],
+        ["Waffles", "Poppy"],
+        ["Table", "Couch", "TV", "Snacks", "Some fruit", "Pots", "Pans", "FireStick", "The remote (somewhere)", "Rug", "Another rug"],
+        ["Living Room", "Kitchen", "Bedroom", "Dining Room"]
+    ]
+    
+    let headers = ["Humans", "Cats", "Objects", "Rooms"]
     
     let cellID = "cellID"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,53 +34,35 @@ class ViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
     }
     
+    // Creates headers for sections
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let humansLabel = UILabel()
-        humansLabel.text = "Humans"
-        humansLabel.backgroundColor = .lightGray
         
-        let catLabel = UILabel()
-        catLabel.text = "Cats"
-        catLabel.backgroundColor = .lightGray
+        let label = UILabel()
+        label.text = headers[section]
+        label.backgroundColor = .lightGray
         
-        if section == 0 {
-            return humansLabel
-        } else {
-            return catLabel
-        }
+        return label
     }
     
     // Creates table sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return twoDimensionalArray.count
     }
     
     // Creates rows for EACH SECTION (Adds all rows to each section)
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return humans.count
-        } else {
-            return cats.count
-        }
+        return twoDimensionalArray[section].count
     }
     
     // Creates the cell in EACH ROW (Adds a cell to each row)
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let humanCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let catCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        let humanName = humans[indexPath.row]
-        humanCell.textLabel?.text = "\(humanName) [Section: \(indexPath.section) Row: \(indexPath.row)]"
+        let name = twoDimensionalArray[indexPath.section][indexPath.row]
         
-        let catName = cats[indexPath.row]
-        catCell.textLabel?.text = "\(catName) [Section: \(indexPath.section) Row: \(indexPath.row)]"
+        cell.textLabel?.text = "\(name) [Section: \(indexPath.section) Row: \(indexPath.row)]"
         
-        if indexPath.section == 0 {
-            return humanCell
-        } else {
-            return catCell
-
-        }
+        return cell
     }
 }
 
