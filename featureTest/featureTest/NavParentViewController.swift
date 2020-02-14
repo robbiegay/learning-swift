@@ -8,11 +8,14 @@
 
 import UIKit
 import TinyConstraints
+import AudioToolbox
 
 class NavParentViewController: UIViewController {
     
     let pushButton = UIButton()
     let presentButton = UIButton()
+    
+    let vc = ViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +49,25 @@ class NavParentViewController: UIViewController {
     }
     
     @objc func handlePush() {
-        navigationController?.pushViewController(FruitTableViewController(), animated: true)
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        vc.tableView.isUserInteractionEnabled = true
+        vc.tableView.addGestureRecognizer(pan)
+        
+        // iPhone 7 and up: Haptics
+        let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
+        heavyImpact.impactOccurred()
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func handlePresent() {
-        navigationController?.present(ViewController(), animated: true, completion: nil)
+        // iPhone 6s Haptic workaround
+        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+        navigationController?.present(FruitTableViewController(), animated: true, completion: nil)
+    }
+    
+    @objc func handlePan() {
+        print("Panned")
+        vc.navigationController?.dismiss(animated: true, completion: nil)
     }
 }
