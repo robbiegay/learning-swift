@@ -10,7 +10,7 @@ import TinyConstraints
 
 class ViewController: UITableViewController {
     // Try to write code that allows you to change only these top level variables, and everything below works automatically
-    
+        
     let twoDimensionalArray = [
         ["Robbie", "Anna"],
         ["Waffles", "Poppy"],

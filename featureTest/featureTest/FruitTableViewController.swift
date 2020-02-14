@@ -24,7 +24,7 @@ class FruitTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         navigationItem.title = "Fruit"
         navigationController?.navigationBar.prefersLargeTitles = true
         

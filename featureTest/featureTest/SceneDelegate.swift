@@ -26,20 +26,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             MainViewController()
         let tableView = ViewController()
         let fruitTabelView = FruitTableViewController()
+        let NavParentVC = NavParentViewController()
                 
         // --> Adding nav bars to two of the pages
         let housematesNavController = UINavigationController(rootViewController: tableView)
         let fruitNavController = UINavigationController(rootViewController: fruitTabelView)
+        let pushNavController = UINavigationController(rootViewController: NavParentVC)
             
         // --> Creating a tabBarController
         let tabBarController = UITabBarController()
         // --> Adding the veiws to the tabBar
-        tabBarController.setViewControllers([mainView, housematesNavController, fruitNavController], animated: true)
+        tabBarController.setViewControllers([mainView, housematesNavController, fruitNavController, pushNavController], animated: true)
         // --> Adding each tab bar items label and icon
         // mainView.tabBarItem = UITabBarItem(title: "Feature Test", image: #imageLiteral(resourceName: "Moolathon Logo final_logo only black"), tag: 0)
         mainView.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
         housematesNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
         fruitNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 2)
+        pushNavController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 3)
         
         // --> Placing the tab bar in the window's rootViewController
         // Use a UIHostingController as window root view controller.
