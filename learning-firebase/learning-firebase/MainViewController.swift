@@ -62,7 +62,11 @@ class MainViewController: UIViewController {
         // updateData(["alreadyExists": "newValue"])
         // ------------------------------------------------------
         // Delete (DELETE)
-        //
+        // .document("DC").delete()
+        // Deleting a document DOES NOT delete its subcollections
+        // Delete a field:
+        // .document("BJ").updateData(["capital": FieldValue.delete()])
+        // ------------------------------------------------------
         // Notes:
         // Add a server timestamp: ["lastUpdated": FieldValue.serverTimestamp()]
         // Increment or decrement a value: "population": FieldValue.increment(Int64(50)) -> if no value, + by 1
