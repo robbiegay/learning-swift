@@ -7,5 +7,6 @@ target 'learning-firebase' do
 
   # Pods for learning-firebase
   pod 'Firebase/Analytics'
+  pod 'FirebaseFirestoreSwift'
 
 end
