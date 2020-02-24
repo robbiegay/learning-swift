@@ -18,6 +18,7 @@
 		45C47E2C23FD890A00BFA6BB /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C47E2B23FD890A00BFA6BB /* NotificationView.swift */; };
 		45C47E2E23FD890B00BFA6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45C47E2D23FD890B00BFA6BB /* Assets.xcassets */; };
 		45C47E3123FD890B00BFA6BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45C47E3023FD890B00BFA6BB /* Preview Assets.xcassets */; };
+		45DDAB7C23FDB7C30096BC1D /* MainInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDAB7B23FDB7C30096BC1D /* MainInterfaceController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		45C47E3023FD890B00BFA6BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		45C47E3223FD890B00BFA6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C47E3323FD890B00BFA6BB /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		45DDAB7B23FDB7C30096BC1D /* MainInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainInterfaceController.swift; path = "learning-watch WatchKit Extension/MainInterfaceController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		45C47E0423FD890900BFA6BB = {
 			isa = PBXGroup;
 			children = (
+				45DDAB7B23FDB7C30096BC1D /* MainInterfaceController.swift */,
 				45C47E1323FD890900BFA6BB /* learning-watch WatchKit App */,
 				45C47E2223FD890A00BFA6BB /* learning-watch WatchKit Extension */,
 				45C47E0C23FD890900BFA6BB /* Products */,
@@ -272,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DDAB7C23FDB7C30096BC1D /* MainInterfaceController.swift in Sources */,
 				45C47E2623FD890A00BFA6BB /* HostingController.swift in Sources */,
 				45C47E2423FD890A00BFA6BB /* ContentView.swift in Sources */,
 				45C47E2A23FD890A00BFA6BB /* NotificationController.swift in Sources */,
