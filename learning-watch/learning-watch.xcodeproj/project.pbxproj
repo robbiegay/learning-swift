@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4590883B240444280003C17C /* StartRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4590883A240444280003C17C /* StartRun.swift */; };
+		4590883D24044A430003C17C /* ActiveRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4590883C24044A430003C17C /* ActiveRun.swift */; };
 		45C47E1023FD890900BFA6BB /* learning-watch WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 45C47E0F23FD890900BFA6BB /* learning-watch WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		45C47E1623FD890900BFA6BB /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45C47E1423FD890900BFA6BB /* Interface.storyboard */; };
 		45C47E1823FD890A00BFA6BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45C47E1723FD890A00BFA6BB /* Assets.xcassets */; };
@@ -64,6 +66,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4590883A240444280003C17C /* StartRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRun.swift; sourceTree = "<group>"; };
+		4590883C24044A430003C17C /* ActiveRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRun.swift; sourceTree = "<group>"; };
 		45C47E0B23FD890900BFA6BB /* learning-watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learning-watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C47E0F23FD890900BFA6BB /* learning-watch WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learning-watch WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C47E1523FD890900BFA6BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 			children = (
 				45C47E2323FD890A00BFA6BB /* ContentView.swift */,
 				45C47E2523FD890A00BFA6BB /* HostingController.swift */,
+				4590883A240444280003C17C /* StartRun.swift */,
+				4590883C24044A430003C17C /* ActiveRun.swift */,
 				45C47E2723FD890A00BFA6BB /* ExtensionDelegate.swift */,
 				45C47E2923FD890A00BFA6BB /* NotificationController.swift */,
 				45C47E2B23FD890A00BFA6BB /* NotificationView.swift */,
@@ -278,7 +284,9 @@
 				45DDAB7C23FDB7C30096BC1D /* MainInterfaceController.swift in Sources */,
 				45C47E2623FD890A00BFA6BB /* HostingController.swift in Sources */,
 				45C47E2423FD890A00BFA6BB /* ContentView.swift in Sources */,
+				4590883D24044A430003C17C /* ActiveRun.swift in Sources */,
 				45C47E2A23FD890A00BFA6BB /* NotificationController.swift in Sources */,
+				4590883B240444280003C17C /* StartRun.swift in Sources */,
 				45C47E2823FD890A00BFA6BB /* ExtensionDelegate.swift in Sources */,
 				45C47E2C23FD890A00BFA6BB /* NotificationView.swift in Sources */,
 			);

@@ -14,9 +14,7 @@ class MainInterfaceController: WKInterfaceController {
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-//        let button = WKInterfaceButton()
-    
+            
         // Configure interface objects here.
     }
 
