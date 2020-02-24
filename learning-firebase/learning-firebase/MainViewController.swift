@@ -37,7 +37,7 @@ class MainViewController: UIViewController {
         // addDocument(data: [data]) -> creates new doc with auto-generated UID
         // ------------------------------------------------------
         // Read (GET)
-        // document("name).getDocument { (document, error) in
+        // document("name").getDocument { (document, error) in
         //   if let document = document, document.exisit {
         //     print(document.data())
         //   } else {
