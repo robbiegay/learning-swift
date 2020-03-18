@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFA2422795900C757EF /* AppDelegate.swift */; };
 		45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFC2422795900C757EF /* SceneDelegate.swift */; };
-		45B5CEFF2422795900C757EF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFE2422795900C757EF /* ContentView.swift */; };
 		45B5CF012422795900C757EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF002422795900C757EF /* Assets.xcassets */; };
 		45B5CF042422795900C757EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF032422795900C757EF /* Preview Assets.xcassets */; };
 		45B5CF072422795900C757EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF052422795900C757EF /* LaunchScreen.storyboard */; };
+		45B5CF0F24227A8600C757EF /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CF0E24227A8600C757EF /* SignupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lbta-instagram-firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B5CEFA2422795900C757EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45B5CEFC2422795900C757EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		45B5CEFE2422795900C757EF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		45B5CF002422795900C757EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B5CF032422795900C757EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		45B5CF062422795900C757EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45B5CF082422795900C757EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B5CF0E24227A8600C757EF /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 			children = (
 				45B5CEFA2422795900C757EF /* AppDelegate.swift */,
 				45B5CEFC2422795900C757EF /* SceneDelegate.swift */,
-				45B5CEFE2422795900C757EF /* ContentView.swift */,
+				45B5CF0E24227A8600C757EF /* SignupViewController.swift */,
 				45B5CF002422795900C757EF /* Assets.xcassets */,
 				45B5CF052422795900C757EF /* LaunchScreen.storyboard */,
 				45B5CF082422795900C757EF /* Info.plist */,
@@ -148,7 +148,7 @@
 			files = (
 				45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */,
 				45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */,
-				45B5CEFF2422795900C757EF /* ContentView.swift in Sources */,
+				45B5CF0F24227A8600C757EF /* SignupViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
