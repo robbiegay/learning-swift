@@ -1,0 +1,6 @@
+framework module Pods_lbta_instagram_firebase {
+  umbrella header "Pods-lbta-instagram-firebase-umbrella.h"
+
+  export *
+  module * { export * }
+}
