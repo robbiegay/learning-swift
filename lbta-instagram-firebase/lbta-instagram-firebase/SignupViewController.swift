@@ -144,10 +144,9 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let profilePictureURL = url?.absoluteString
                     print("Profile picture url saved:",profilePictureURL)
                     
-                    let usernameValues = ["username": username, "profilePictureURL": profilePictureURL]
-                    let values = [uid: usernameValues]
+                    let values = ["username": username, "profilePictureURL": profilePictureURL]
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: values) { (err) in
+                    db.collection("users").document(uid).setData(values) { (err) in
                         if let err = err {
                             print("Failed to save user info into db:",err)
                             return

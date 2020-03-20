@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
+		459F0861242526A2007D403B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F0860242526A2007D403B /* MainTabBarController.swift */; };
+		459F08632425276A007D403B /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F08622425276A007D403B /* UserProfileController.swift */; };
 		45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFA2422795900C757EF /* AppDelegate.swift */; };
 		45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFC2422795900C757EF /* SceneDelegate.swift */; };
 		45B5CF012422795900C757EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF002422795900C757EF /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 
 /* Begin PBXFileReference section */
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		459F0860242526A2007D403B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		459F08622425276A007D403B /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lbta-instagram-firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B5CEFA2422795900C757EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45B5CEFC2422795900C757EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				45B5CF102422863900C757EF /* Utils */,
 				45B5CEFA2422795900C757EF /* AppDelegate.swift */,
 				45B5CEFC2422795900C757EF /* SceneDelegate.swift */,
+				459F0860242526A2007D403B /* MainTabBarController.swift */,
+				459F08622425276A007D403B /* UserProfileController.swift */,
 				45B5CF0E24227A8600C757EF /* SignupViewController.swift */,
 				45B5CF002422795900C757EF /* Assets.xcassets */,
 				45B5CF052422795900C757EF /* LaunchScreen.storyboard */,
@@ -110,7 +116,6 @@
 				AC45A3F6D8A3D5AF631DAAAD /* Pods-lbta-instagram-firebase.debug.xcconfig */,
 				F3589FABB2452E16289A1909 /* Pods-lbta-instagram-firebase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -232,6 +237,8 @@
 			files = (
 				45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */,
 				45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */,
+				459F08632425276A007D403B /* UserProfileController.swift in Sources */,
+				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
 				45B5CF0F24227A8600C757EF /* SignupViewController.swift in Sources */,
 				45B5CF122422867900C757EF /* Extensions.swift in Sources */,
 			);
