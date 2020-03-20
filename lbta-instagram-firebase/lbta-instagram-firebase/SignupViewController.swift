@@ -8,14 +8,36 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handlePlusPhoto), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handlePlusPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let origionalImage = info[.originalImage] as? UIImage {
+            plusPhotoButton.setImage(origionalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        dismiss(animated: true, completion: nil)
+    }
     
     let emailTextField: UITextField = {
         let tf = UITextField()
@@ -92,12 +114,48 @@ class SignupViewController: UIViewController {
         guard let username = usernameTextField.text, username.description.count > 0 else { return }
         guard let password = passwordTextField.text, password.description.count > 0 else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user: AuthDataResult?, error: Error?) in
+        Auth.auth().createUser(withEmail: email, password: password) { (dataResult: AuthDataResult?, error: Error?) in
             if let err = error {
                 print("Failed to create user:",err)
                 return
             }
-            print("Sucesfully created user:",user ?? "")
+            print("Sucesfully created user:",dataResult?.user.uid ?? "")
+            
+            guard let uid = dataResult?.user.uid else { return }
+            
+            let filename = UUID.init().uuidString
+            guard let image = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
+                
+            storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+                
+                if let err = err {
+                    print("Failed to upload profile image:",err)
+                    return
+                }
+                print("Profile picture succesfully saved to db.")
+                
+                storageRef.downloadURL { (url, err) in
+                    if let err = err {
+                        print("Error retrieving download url: \(err.localizedDescription)")
+                        return
+                    }
+                    let profilePictureURL = url?.absoluteString
+                    print("Profile picture url saved:",profilePictureURL)
+                    
+                    let usernameValues = ["username": username, "profilePictureURL": profilePictureURL]
+                    let values = [uid: usernameValues]
+                    let db = Firestore.firestore()
+                    db.collection("users").addDocument(data: values) { (err) in
+                        if let err = err {
+                            print("Failed to save user info into db:",err)
+                            return
+                        }
+                        print("Succesfully saved user info to db.")
+                    }
+                }
+            }
         }
     }
     
