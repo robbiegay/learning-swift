@@ -1,5 +1,5 @@
 //
-//  SignupViewController.swift
+//  SignUpController.swift
 //  lbta-instagram-firebase
 //
 //  Created by Robbie Gay on 3/18/20.
@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class SignupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -144,10 +144,9 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let profilePictureURL = url?.absoluteString
                     print("Profile picture url saved:",profilePictureURL)
                     
-                    let usernameValues = ["username": username, "profilePictureURL": profilePictureURL]
-                    let values = [uid: usernameValues]
+                    let values = ["username": username, "profilePictureURL": profilePictureURL]
                     let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: values) { (err) in
+                    db.collection("users").document(uid).setData(values) { (err) in
                         if let err = err {
                             print("Failed to save user info into db:",err)
                             return
@@ -174,36 +173,5 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
         view.addSubview(stackView)
         
         stackView.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
-    }
-}
-
-extension UIView {
-    func anchor(top: NSLayoutYAxisAnchor?, left: NSLayoutXAxisAnchor?, bottom: NSLayoutYAxisAnchor?, right: NSLayoutXAxisAnchor?, paddingTop: CGFloat, paddingLeft: CGFloat, paddingBottom: CGFloat, paddingRight: CGFloat, width: CGFloat, height: CGFloat) {
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        if let top = top {
-            topAnchor.constraint(equalTo: top, constant: paddingTop).isActive = true
-        }
-        
-        if let left = left {
-            leftAnchor.constraint(equalTo: left, constant: paddingLeft).isActive = true
-        }
-        
-        if let bottom = bottom {
-            bottomAnchor.constraint(equalTo: bottom, constant: paddingBottom).isActive = true
-        }
-
-        if let right = right {
-            rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
-        }
-        
-        if width != 0 {
-            widthAnchor.constraint(equalToConstant: width).isActive = true
-        }
-        
-        if height != 0 {
-            heightAnchor.constraint(equalToConstant: height).isActive = true
-        }
     }
 }

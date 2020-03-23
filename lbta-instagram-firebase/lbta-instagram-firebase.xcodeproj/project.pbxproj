@@ -3,23 +3,31 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
+		459F0861242526A2007D403B /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F0860242526A2007D403B /* MainTabBarController.swift */; };
+		459F08632425276A007D403B /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F08622425276A007D403B /* UserProfileController.swift */; };
+		459F086624253E85007D403B /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459F086524253E85007D403B /* UserProfileHeader.swift */; };
+		45B2A7A8242960E800F072D1 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B2A7A7242960E800F072D1 /* LoginController.swift */; };
 		45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFA2422795900C757EF /* AppDelegate.swift */; };
 		45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CEFC2422795900C757EF /* SceneDelegate.swift */; };
 		45B5CF012422795900C757EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF002422795900C757EF /* Assets.xcassets */; };
 		45B5CF042422795900C757EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF032422795900C757EF /* Preview Assets.xcassets */; };
 		45B5CF072422795900C757EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B5CF052422795900C757EF /* LaunchScreen.storyboard */; };
-		45B5CF0F24227A8600C757EF /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CF0E24227A8600C757EF /* SignupViewController.swift */; };
+		45B5CF0F24227A8600C757EF /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CF0E24227A8600C757EF /* SignUpController.swift */; };
 		45B5CF122422867900C757EF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CF112422867900C757EF /* Extensions.swift */; };
 		CB95B300C8C30E6259E824C4 /* Pods_lbta_instagram_firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973D1B0CF96BF3201977DDD9 /* Pods_lbta_instagram_firebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		459F0860242526A2007D403B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		459F08622425276A007D403B /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		459F086524253E85007D403B /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		45B2A7A7242960E800F072D1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lbta-instagram-firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B5CEFA2422795900C757EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45B5CEFC2422795900C757EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +35,7 @@
 		45B5CF032422795900C757EF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		45B5CF062422795900C757EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45B5CF082422795900C757EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45B5CF0E24227A8600C757EF /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		45B5CF0E24227A8600C757EF /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		45B5CF112422867900C757EF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		973D1B0CF96BF3201977DDD9 /* Pods_lbta_instagram_firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lbta_instagram_firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC45A3F6D8A3D5AF631DAAAD /* Pods-lbta-instagram-firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lbta-instagram-firebase.debug.xcconfig"; path = "Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase.debug.xcconfig"; sourceTree = "<group>"; };
@@ -46,6 +54,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		459F086424253E6E007D403B /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				459F08622425276A007D403B /* UserProfileController.swift */,
+				459F086524253E85007D403B /* UserProfileHeader.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		45B2A7A6242960D800F072D1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45B2A7A7242960E800F072D1 /* LoginController.swift */,
+				45B5CF0E24227A8600C757EF /* SignUpController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		45B5CEEE2422795900C757EF = {
 			isa = PBXGroup;
 			children = (
@@ -67,10 +93,12 @@
 		45B5CEF92422795900C757EF /* lbta-instagram-firebase */ = {
 			isa = PBXGroup;
 			children = (
+				45B2A7A6242960D800F072D1 /* Login */,
+				459F086424253E6E007D403B /* UserProfile */,
 				45B5CF102422863900C757EF /* Utils */,
 				45B5CEFA2422795900C757EF /* AppDelegate.swift */,
 				45B5CEFC2422795900C757EF /* SceneDelegate.swift */,
-				45B5CF0E24227A8600C757EF /* SignupViewController.swift */,
+				459F0860242526A2007D403B /* MainTabBarController.swift */,
 				45B5CF002422795900C757EF /* Assets.xcassets */,
 				45B5CF052422795900C757EF /* LaunchScreen.storyboard */,
 				45B5CF082422795900C757EF /* Info.plist */,
@@ -110,7 +138,6 @@
 				AC45A3F6D8A3D5AF631DAAAD /* Pods-lbta-instagram-firebase.debug.xcconfig */,
 				F3589FABB2452E16289A1909 /* Pods-lbta-instagram-firebase.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -231,8 +258,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */,
+				459F086624253E85007D403B /* UserProfileHeader.swift in Sources */,
 				45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */,
-				45B5CF0F24227A8600C757EF /* SignupViewController.swift in Sources */,
+				459F08632425276A007D403B /* UserProfileController.swift in Sources */,
+				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
+				45B2A7A8242960E800F072D1 /* LoginController.swift in Sources */,
+				45B5CF0F24227A8600C757EF /* SignUpController.swift in Sources */,
 				45B5CF122422867900C757EF /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
