@@ -56,10 +56,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         if isEmailValid && isUsernameValid && isPasswordValid {
             signupButton.isEnabled = true
-            signupButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+            signupButton.backgroundColor = buttonActiveColor
         } else {
             signupButton.isEnabled = false
-            signupButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
+            signupButton.backgroundColor = buttonInactiveColor
         }
     }
     
@@ -97,6 +97,21 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
+    let alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account? ", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        attributedTitle.append(NSAttributedString(string: "Log In", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor : buttonActiveColor]))
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleShowSignIn), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handleShowSignIn() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,6 +120,9 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         setupInputFields()
+        
+        view.addSubview(alreadyHaveAccountButton)
+        alreadyHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -15, paddingRight: 0, width: 0, height: 50)
         
         view.backgroundColor = .white
     }
