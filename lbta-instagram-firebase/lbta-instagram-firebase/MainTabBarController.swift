@@ -19,10 +19,13 @@ class MainTabBarController: UITabBarController {
             DispatchQueue.main.async {
                 self.present(navController, animated: true, completion: nil)
             }
-            
             return
         }
         
+        setupViewControllers()
+    }
+    
+    func setupViewControllers() {
         let layout = UICollectionViewFlowLayout()
         let userProfileController = UserProfileController(collectionViewLayout: layout)
         
