@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -59,23 +60,6 @@ class LoginController: UIViewController {
         return button
     }()
     
-    @objc func handleTextInputChange() {
-           let isEmailValid = emailTextField.text?.count ?? 0 > 0
-           let isPasswordValid = passwordTextField.text?.count ?? 0 > 0
-           
-           if isEmailValid && isPasswordValid {
-               signInButton.isEnabled = true
-               signInButton.backgroundColor = buttonActiveColor
-           } else {
-               signInButton.isEnabled = false
-               signInButton.backgroundColor = buttonInactiveColor
-           }
-       }
-    
-    @objc func handleSignUp() {
-        print("Signing in...")
-    }
-    
     let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         
@@ -86,11 +70,6 @@ class LoginController: UIViewController {
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
-    
-    @objc func handleShowSignUp() {
-        let signUpController = SignUpController()
-        navigationController?.pushViewController(signUpController, animated: true)
-    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -110,6 +89,43 @@ class LoginController: UIViewController {
         dontHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -15, paddingRight: 0, width: 0, height: 50)
         
         setupInputFields()
+    }
+    
+    @objc func handleTextInputChange() {
+           let isEmailValid = emailTextField.text?.count ?? 0 > 0
+           let isPasswordValid = passwordTextField.text?.count ?? 0 > 0
+           
+           if isEmailValid && isPasswordValid {
+               signInButton.isEnabled = true
+               signInButton.backgroundColor = buttonActiveColor
+           } else {
+               signInButton.isEnabled = false
+               signInButton.backgroundColor = buttonInactiveColor
+           }
+       }
+    
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (dataResult, err) in
+            if let err = err {
+                print("Faield to sign in with email:",err)
+            }
+            
+            print("Succesfully logged in:",dataResult?.user.uid ?? "")
+            
+            let window = UIApplication.shared.windows.filter{$0.isKeyWindow}.first
+            let mainTabBarController = window?.rootViewController as! MainTabBarController
+            mainTabBarController.setupViewControllers()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc func handleShowSignUp() {
+        let signUpController = SignUpController()
+        navigationController?.pushViewController(signUpController, animated: true)
     }
     
     fileprivate func setupInputFields() {

@@ -11,11 +11,11 @@ import Firebase
 
 // Init global color variables
 // Nat Forrest Theme
-let customGreen = UIColor(red:0.35, green:0.45, blue:0.36, alpha:1.00)
-let customYellow = UIColor(red:0.75, green:0.64, blue:0.29, alpha:1.00)
-let customTan = UIColor(red:0.95, green:0.89, blue:0.81, alpha:1.00)
-let customBrown = UIColor(red:0.35, green:0.20, blue:0.12, alpha:1.00)
-let customRed = UIColor(red:0.65, green:0.31, blue:0.18, alpha:1.00)
+//let customGreen = UIColor(red:0.35, green:0.45, blue:0.36, alpha:1.00)
+//let customYellow = UIColor(red:0.75, green:0.64, blue:0.29, alpha:1.00)
+//let customTan = UIColor(red:0.95, green:0.89, blue:0.81, alpha:1.00)
+//let customBrown = UIColor(red:0.35, green:0.20, blue:0.12, alpha:1.00)
+//let customRed = UIColor(red:0.65, green:0.31, blue:0.18, alpha:1.00)
 
 let instagramDarkBlue = UIColor.rgb(red: 0, green: 120, blue: 175)
 let instagramButtonActiveColor = UIColor.rgb(red: 17, green: 154, blue: 237)
@@ -24,8 +24,8 @@ let instragramButtonInactiveColor = UIColor.rgb(red: 149, green: 204, blue: 244)
 let mainColor = instagramDarkBlue
 let buttonActiveColor = instagramButtonActiveColor
 let buttonInactiveColor = instragramButtonInactiveColor
-let accentColor = customBrown
-let themeBackgroundColor = customTan
+//let accentColor = customBrown
+//let themeBackgroundColor = customTan
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

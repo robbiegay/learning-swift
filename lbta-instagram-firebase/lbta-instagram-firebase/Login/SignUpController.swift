@@ -19,26 +19,6 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
-    @objc func handlePlusPhoto() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let editedImage = info[.editedImage] as? UIImage {
-            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        } else if let origionalImage = info[.originalImage] as? UIImage {
-            plusPhotoButton.setImage(origionalImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
-        plusPhotoButton.layer.masksToBounds = true
-        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
-        plusPhotoButton.layer.borderWidth = 3
-        dismiss(animated: true, completion: nil)
-    }
-    
     let emailTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Email"
@@ -48,20 +28,6 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         tf.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return tf
     }()
-    
-    @objc func handleTextInputChange() {
-        let isEmailValid = emailTextField.text?.count ?? 0 > 0
-        let isUsernameValid = usernameTextField.text?.count ?? 0 > 0
-        let isPasswordValid = passwordTextField.text?.count ?? 0 > 0
-        
-        if isEmailValid && isUsernameValid && isPasswordValid {
-            signupButton.isEnabled = true
-            signupButton.backgroundColor = buttonActiveColor
-        } else {
-            signupButton.isEnabled = false
-            signupButton.backgroundColor = buttonInactiveColor
-        }
-    }
     
     let usernameTextField: UITextField = {
         let tf = UITextField()
@@ -108,10 +74,6 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         return button
     }()
     
-    @objc func handleShowSignIn() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,6 +87,44 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         alreadyHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -15, paddingRight: 0, width: 0, height: 50)
         
         view.backgroundColor = .white
+    }
+    
+    @objc func handlePlusPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else if let origionalImage = info[.originalImage] as? UIImage {
+            plusPhotoButton.setImage(origionalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleTextInputChange() {
+        let isEmailValid = emailTextField.text?.count ?? 0 > 0
+        let isUsernameValid = usernameTextField.text?.count ?? 0 > 0
+        let isPasswordValid = passwordTextField.text?.count ?? 0 > 0
+        
+        if isEmailValid && isUsernameValid && isPasswordValid {
+            signupButton.isEnabled = true
+            signupButton.backgroundColor = buttonActiveColor
+        } else {
+            signupButton.isEnabled = false
+            signupButton.backgroundColor = buttonInactiveColor
+        }
+    }
+    
+    @objc func handleShowSignIn() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func handleSignUp() {
@@ -170,6 +170,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                             return
                         }
                         print("Succesfully saved user info to db.")
+                        
+                        let window = UIApplication.shared.windows.filter{$0.isKeyWindow}.first
+                        let mainTabBarController = window?.rootViewController as! MainTabBarController
+                        mainTabBarController.setupViewControllers()
+                        
+                        self.dismiss(animated: true, completion: nil)
                     }
                 }
             }
