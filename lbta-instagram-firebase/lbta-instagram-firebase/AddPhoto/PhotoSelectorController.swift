@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let cellID = "cellID"
     let headerID = "headerID"
+    
+    var images = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +21,37 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         setupNavigationButtons()
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellID)
     
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        
+        fetchPhotos()
+    }
+    
+    fileprivate func fetchPhotos() {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 10
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        fetchOptions.sortDescriptors = [sortDescriptor]
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        
+        allPhotos.enumerateObjects { (asset, count, stop) in
+
+            let imageManager = PHImageManager.default()
+            let targetSize = CGSize(width: 350, height: 350)
+            let options = PHImageRequestOptions()
+            options.isSynchronous = true
+            imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
+                
+                if let image = image {
+                    self.images.append(image)
+                }
+                
+                if count == allPhotos.count - 1 {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -53,12 +84,15 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .systemRed
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PhotoSelectorCell
+        
+        cell.photoImageView.image = images[indexPath.item]
+        
         return cell
     }
     
