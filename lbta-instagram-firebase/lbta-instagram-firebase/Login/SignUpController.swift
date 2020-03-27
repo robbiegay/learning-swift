@@ -84,7 +84,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         setupInputFields()
         
         view.addSubview(alreadyHaveAccountButton)
-        alreadyHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -15, paddingRight: 0, width: 0, height: 50)
+        alreadyHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 15, paddingRight: 0, width: 0, height: 50)
         
         view.backgroundColor = .white
     }
@@ -160,7 +160,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                         return
                     }
                     let profilePictureURL = url?.absoluteString
-                    print("Profile picture url saved:",profilePictureURL)
+                    print("Profile picture url saved:",profilePictureURL ?? "")
                     
                     let values = ["username": username, "profilePictureURL": profilePictureURL]
                     let db = Firestore.firestore()
