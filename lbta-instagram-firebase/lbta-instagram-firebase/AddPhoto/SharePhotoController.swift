@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SharePhotoController: UIViewController {
     
@@ -23,7 +24,60 @@ class SharePhotoController: UIViewController {
     }
     
     @objc func handleShare() {
-        print("Sharing...")
+        // prevents user from uploading without a caption
+        let caption = textView.text
+        if caption?.count == 0 {
+            return
+        }
+        
+        guard let image = selectedImage else { return }
+        
+        guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
+        
+        // Prevents user from saving multiple times, and reenables if an error occurs
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        let filename = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("posts").child(filename)
+        storageRef.putData(uploadData, metadata: nil) { (metadata, err) in
+            if let err = err {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to upload post image:",err)
+                return
+            }
+                        
+            storageRef.downloadURL { (url, err) in
+                if let err = err {
+                    print("Failed to fetch post image URL:",err)
+                    return
+                }
+                
+                guard let downloadURL = url?.absoluteString else { return }
+                
+                print("Sucesfully uploaded post image:",downloadURL)
+                
+                self.saveToDatebaseWithImageURL(imageURL: downloadURL)
+            }
+        }
+    }
+    
+    fileprivate func saveToDatebaseWithImageURL(imageURL: String) {
+        guard let caption = textView.text else { return }
+        guard let postImage = imageView.image else { return }
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let values = ["imageURL": imageURL, "caption": caption, "imageWidth": postImage.size.width, "imageHeight": postImage.size.height, "creationDate": Date().timeIntervalSince1970] as [String : Any]
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).collection("posts").addDocument(data: values, completion: { (err) in
+            if let err = err {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to save post to DB:",err)
+            }
+            
+            print("sucessfully saved post to DB.")
+            self.dismiss(animated: true, completion: nil)
+        })
     }
     
     let imageView: UIImageView = {

@@ -160,7 +160,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                         return
                     }
                     let profilePictureURL = url?.absoluteString
-                    print("Profile picture url saved:",profilePictureURL)
+                    print("Profile picture url saved:",profilePictureURL ?? "")
                     
                     let values = ["username": username, "profilePictureURL": profilePictureURL]
                     let db = Firestore.firestore()
