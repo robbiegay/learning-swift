@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let cellID = "cellID"
+    var postsArray = [Post]()
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +23,34 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: cellID)
         
         setupLogOutButton()
+        
+        fetchPosts()
+        }
+    
+    fileprivate func fetchPosts() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
+        ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
+            if let err = err {
+                print("Failed to fetch user posts:",err)
+            }
+            
+            // Clears the post array when the snapshot listener is triggered
+            self.postsArray.removeAll()
+            
+            guard let documents = snapshot?.documents else { return }
+            
+            for document in documents {
+                let dictionary = document.data()
+                let post = Post(dictionary: dictionary)
+                self.postsArray.append(post)
+            }
+            
+            self.collectionView.reloadData()
+        })
     }
     
     fileprivate func setupLogOutButton() {
@@ -53,14 +80,14 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 7
+        return postsArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! UserProfilePhotoCell
         
-        cell.backgroundColor = .purple
-        
+        cell.post = postsArray[indexPath.item]
+                
         return cell
     }
     
@@ -89,8 +116,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
     }
-    
-    var user: User?
+        
     fileprivate func fetchUser() {
         let db = Firestore.firestore()
         let userUID = Auth.auth().currentUser?.uid ?? ""
@@ -106,16 +132,5 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.collectionView.reloadData()
         }
         
-    }
-}
-
-// Create the model for the data, to be reused throughout the app
-struct User {
-    let username: String
-    let profilePictureURL: String
-    
-    init(dictionary: [String:Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.profilePictureURL = dictionary["profilePictureURL"] as? String ?? ""
     }
 }
