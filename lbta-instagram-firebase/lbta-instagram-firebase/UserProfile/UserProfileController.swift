@@ -13,6 +13,7 @@ import FirebaseFirestore
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let cellID = "cellID"
     var postsArray = [Post]()
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,15 +28,18 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         setupLogOutButton()
         
         fetchPosts()
-    }
+        }
     
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
-        ref.getDocuments { (snapshot, err) in
+        ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
             if let err = err {
                 print("Failed to fetch user posts:",err)
             }
+            
+            // Clears the post array when the snapshot listener is triggered
+            self.postsArray.removeAll()
             
             guard let documents = snapshot?.documents else { return }
             
@@ -46,7 +50,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             }
             
             self.collectionView.reloadData()
-        }
+        })
     }
     
     fileprivate func setupLogOutButton() {
@@ -112,8 +116,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
     }
-    
-    var user: User?
+        
     fileprivate func fetchUser() {
         let db = Firestore.firestore()
         let userUID = Auth.auth().currentUser?.uid ?? ""

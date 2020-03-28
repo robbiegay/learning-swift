@@ -14,14 +14,16 @@ class UserProfileHeader: UICollectionViewCell {
     
     var user: User? {
         didSet {
-            setupProfileImage()
+            guard let profileImageURL = user?.profilePictureURL else { return }
+            profileImageView.loadImage(urlString: profileImageURL)
             
             usernameLabel.text = user?.username
         }
     }
     
-    let profileImageView: UIImageView = {
-        let iv = UIImageView()
+    let profileImageView: CustomImageView = {
+        let iv = CustomImageView()
+        iv.backgroundColor = .systemGray5
         return iv
     }()
     
@@ -161,22 +163,6 @@ class UserProfileHeader: UICollectionViewCell {
         topDividerView.anchor(top: stackView.topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
         
         bottomDividerView.anchor(top: stackView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-    }
-    
-    fileprivate func setupProfileImage() {
-        guard let profileImageURL = user?.profilePictureURL else { return }
-        guard let url = URL(string: profileImageURL) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, urlResponse, err) in
-            if let err = err {
-                print("Error getting image:",err)
-            }
-            guard let data = data else { return }
-            let image = UIImage(data: data)
-            DispatchQueue.main.async {
-                self.profileImageView.image = image
-            }
-        }.resume()
     }
     
     required init?(coder: NSCoder) {

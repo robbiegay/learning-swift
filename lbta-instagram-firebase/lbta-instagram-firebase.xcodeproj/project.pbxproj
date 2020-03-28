@@ -25,6 +25,7 @@
 		45BD4DA3242F9AD20052223F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4DA2242F9AD20052223F /* Post.swift */; };
 		45BD4DA5242F9E180052223F /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4DA4242F9E180052223F /* UserProfilePhotoCell.swift */; };
 		45BD4DA7242FA7BA0052223F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4DA6242FA7BA0052223F /* User.swift */; };
+		45BD4DA9242FB42B0052223F /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4DA8242FB42B0052223F /* CustomImageView.swift */; };
 		45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F4C8242E4D8F00893585 /* SharePhotoController.swift */; };
 		CB95B300C8C30E6259E824C4 /* Pods_lbta_instagram_firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973D1B0CF96BF3201977DDD9 /* Pods_lbta_instagram_firebase.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		45BD4DA2242F9AD20052223F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		45BD4DA4242F9E180052223F /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		45BD4DA6242FA7BA0052223F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		45BD4DA8242FB42B0052223F /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		45D6F4C8242E4D8F00893585 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		973D1B0CF96BF3201977DDD9 /* Pods_lbta_instagram_firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lbta_instagram_firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC45A3F6D8A3D5AF631DAAAD /* Pods-lbta-instagram-firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lbta-instagram-firebase.debug.xcconfig"; path = "Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase.debug.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				45B5CF112422867900C757EF /* Extensions.swift */,
+				45BD4DA8242FB42B0052223F /* CustomImageView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
 				45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */,
 				45BD4DA7242FA7BA0052223F /* User.swift in Sources */,
+				45BD4DA9242FB42B0052223F /* CustomImageView.swift in Sources */,
 				4595CD7B242D4D03001F1AAE /* PhotoSelectorHeader.swift in Sources */,
 				45B2A7A8242960E800F072D1 /* LoginController.swift in Sources */,
 				45B5CF0F24227A8600C757EF /* SignUpController.swift in Sources */,
