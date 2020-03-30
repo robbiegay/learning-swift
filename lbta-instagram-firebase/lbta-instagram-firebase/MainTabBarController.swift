@@ -46,7 +46,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func setupViewControllers() {
         // Home
-        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "house"), selectedImage: #imageLiteral(resourceName: "house.fill"), rootViewController: UserProfileController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let homeNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "house"), selectedImage: #imageLiteral(resourceName: "house.fill"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // Search
         let searchNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "magnifyingglass.circle"), selectedImage: #imageLiteral(resourceName: "magnifyingglass.circle.fill"))

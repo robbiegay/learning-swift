@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		452669EF2432757600CBF55A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669EE2432757600CBF55A /* HomeController.swift */; };
+		452669F1243276A900CBF55A /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669F0243276A900CBF55A /* HomePostCell.swift */; };
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
 		4595CD77242D075B001F1AAE /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */; };
 		4595CD79242D4492001F1AAE /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595CD78242D4492001F1AAE /* PhotoSelectorCell.swift */; };
@@ -31,6 +33,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		452669EE2432757600CBF55A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		452669F0243276A900CBF55A /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		4595CD78242D4492001F1AAE /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -70,6 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		452669ED2432756600CBF55A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				452669EE2432757600CBF55A /* HomeController.swift */,
+				452669F0243276A900CBF55A /* HomePostCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		4595CD75242D0745001F1AAE /* AddPhoto */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +134,7 @@
 		45B5CEF92422795900C757EF /* lbta-instagram-firebase */ = {
 			isa = PBXGroup;
 			children = (
+				452669ED2432756600CBF55A /* Home */,
 				45BD4DA1242F9AC30052223F /* Models */,
 				4595CD75242D0745001F1AAE /* AddPhoto */,
 				45B2A7A6242960D800F072D1 /* Login */,
@@ -304,7 +318,9 @@
 				459F08632425276A007D403B /* UserProfileController.swift in Sources */,
 				45BD4DA3242F9AD20052223F /* Post.swift in Sources */,
 				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
+				452669F1243276A900CBF55A /* HomePostCell.swift in Sources */,
 				45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */,
+				452669EF2432757600CBF55A /* HomeController.swift in Sources */,
 				45BD4DA7242FA7BA0052223F /* User.swift in Sources */,
 				45BD4DA9242FB42B0052223F /* CustomImageView.swift in Sources */,
 				4595CD7B242D4D03001F1AAE /* PhotoSelectorHeader.swift in Sources */,

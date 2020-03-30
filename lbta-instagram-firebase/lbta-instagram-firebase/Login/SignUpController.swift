@@ -89,6 +89,23 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         view.backgroundColor = .white
     }
     
+    fileprivate func setupInputFields() {
+        
+        let stackView = UIStackView(arrangedSubviews: [
+            emailTextField,
+            usernameTextField,
+            passwordTextField,
+            signupButton,
+        ])
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        view.addSubview(stackView)
+        
+        stackView.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
+    }
+    
     @objc func handlePlusPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -109,6 +126,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         dismiss(animated: true, completion: nil)
     }
     
+    // Validates input fields
     @objc func handleTextInputChange() {
         let isEmailValid = emailTextField.text?.count ?? 0 > 0
         let isUsernameValid = usernameTextField.text?.count ?? 0 > 0
@@ -123,10 +141,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
     }
     
+    // Switches back to the SignIn page
     @objc func handleShowSignIn() {
         navigationController?.popViewController(animated: true)
     }
     
+    // Creates a new Auth profile for the user
     @objc func handleSignUp() {
         guard let email = emailTextField.text, email.description.count > 0 else { return }
         guard let username = usernameTextField.text, username.description.count > 0 else { return }
@@ -180,22 +200,5 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                 }
             }
         }
-    }
-    
-    fileprivate func setupInputFields() {
-        
-        let stackView = UIStackView(arrangedSubviews: [
-            emailTextField,
-            usernameTextField,
-            passwordTextField,
-            signupButton,
-        ])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        view.addSubview(stackView)
-        
-        stackView.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 20, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 200)
     }
 }

@@ -23,50 +23,12 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         setupNavigationButtons()
         
+        // Register the selected photo and camera roll cells
         collectionView.register(PhotoSelectorCell.self, forCellWithReuseIdentifier: cellID)
     
         collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
         
         fetchPhotos()
-    }
-    
-    fileprivate func assetsFetchOptions() -> PHFetchOptions {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = 30
-        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
-        fetchOptions.sortDescriptors = [sortDescriptor]
-        return fetchOptions
-    }
-    
-    fileprivate func fetchPhotos() {
-        let allPhotos = PHAsset.fetchAssets(with: .image, options: assetsFetchOptions())
-        
-        DispatchQueue.global(qos: .background).async {
-            allPhotos.enumerateObjects { (asset, count, stop) in
-
-                let imageManager = PHImageManager.default()
-                let targetSize = CGSize(width: 200, height: 200)
-                let options = PHImageRequestOptions()
-                options.isSynchronous = true
-                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
-                    
-                    if let image = image {
-                        self.images.append(image)
-                        self.assets.append(asset)
-                        
-                        if self.selectedImage == nil {
-                            self.selectedImage = image
-                        }
-                    }
-                    
-                    if count == allPhotos.count - 1 {
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
-                        }
-                    }
-                }
-            }
-        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -79,6 +41,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         return UIEdgeInsets(top: 1, left: 0, bottom: 0, right: 0)
     }
     
@@ -137,6 +100,45 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
 //    override var prefersStatusBarHidden: Bool {
 //        return true
 //    }
+    
+    fileprivate func assetsFetchOptions() -> PHFetchOptions {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 30
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        fetchOptions.sortDescriptors = [sortDescriptor]
+        return fetchOptions
+    }
+    
+    fileprivate func fetchPhotos() {
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: assetsFetchOptions())
+        
+        DispatchQueue.global(qos: .background).async {
+            allPhotos.enumerateObjects { (asset, count, stop) in
+
+                let imageManager = PHImageManager.default()
+                let targetSize = CGSize(width: 200, height: 200)
+                let options = PHImageRequestOptions()
+                options.isSynchronous = true
+                imageManager.requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: options) { (image, info) in
+                    
+                    if let image = image {
+                        self.images.append(image)
+                        self.assets.append(asset)
+                        
+                        if self.selectedImage == nil {
+                            self.selectedImage = image
+                        }
+                    }
+                    
+                    if count == allPhotos.count - 1 {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     fileprivate func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black

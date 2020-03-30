@@ -11,6 +11,8 @@ import Firebase
 
 class LoginController: UIViewController {
     
+    // I like how Brian sets up his elements, encapsilating all of the
+    // Styling and anchoring within the initial declaration
     let logoContainerView: UIView = {
         let view = UIView()
         
@@ -56,7 +58,7 @@ class LoginController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         button.layer.masksToBounds = true
         
-        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleSignIn), for: .touchUpInside)
         return button
     }()
     
@@ -78,12 +80,12 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(logoContainerView)
-        logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
-        
         navigationController?.isNavigationBarHidden = true
         
         view.backgroundColor = .white
+        
+        view.addSubview(logoContainerView)
+        logoContainerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
         
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 15, paddingRight: 0, width: 0, height: 50)
@@ -91,6 +93,23 @@ class LoginController: UIViewController {
         setupInputFields()
     }
     
+    fileprivate func setupInputFields() {
+        
+        let stackView = UIStackView(arrangedSubviews: [
+            emailTextField,
+            passwordTextField,
+            signInButton,
+        ])
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        view.addSubview(stackView)
+        
+        stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
+    }
+    
+    // Validates if all fields are filled out
     @objc func handleTextInputChange() {
            let isEmailValid = emailTextField.text?.count ?? 0 > 0
            let isPasswordValid = passwordTextField.text?.count ?? 0 > 0
@@ -104,7 +123,8 @@ class LoginController: UIViewController {
            }
        }
     
-    @objc func handleSignUp() {
+    // Attempts to sign the user in
+    @objc func handleSignIn() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
@@ -123,24 +143,9 @@ class LoginController: UIViewController {
         }
     }
     
+    // Switches to the SignUp page
     @objc func handleShowSignUp() {
         let signUpController = SignUpController()
         navigationController?.pushViewController(signUpController, animated: true)
-    }
-    
-    fileprivate func setupInputFields() {
-        
-        let stackView = UIStackView(arrangedSubviews: [
-            emailTextField,
-            passwordTextField,
-            signInButton,
-        ])
-        stackView.distribution = .fillEqually
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        
-        view.addSubview(stackView)
-        
-        stackView.anchor(top: logoContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 40, paddingBottom: 0, paddingRight: 40, width: 0, height: 140)
     }
 }
