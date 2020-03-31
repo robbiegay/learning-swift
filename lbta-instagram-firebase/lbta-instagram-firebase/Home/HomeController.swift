@@ -54,7 +54,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 200)
+        var height: CGFloat = 40 + 8 + 8 // User photo height + top and bottom padding
+        height += view.frame.width // + the width of the screen (making a square for the photo
+        height += 50 // Adds 50 for the lower controls (like, comment, etc)
+        height += 60 // Space for caption
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
