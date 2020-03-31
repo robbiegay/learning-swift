@@ -15,6 +15,8 @@ struct Post {
     let imageHeight: String
     let imageWidth: String
     
+    // Creates an initializer, that takes in a dict and pulls things
+    // like imageURL as String, or "" if no match found
     init(dictionary: [String: Any]) {
         self.imageURL = dictionary["imageURL"] as? String ?? ""
         self.caption = dictionary["caption"] as? String ?? ""

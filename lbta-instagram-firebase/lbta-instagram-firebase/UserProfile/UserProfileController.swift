@@ -19,17 +19,38 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         super.viewDidLoad()
         collectionView?.backgroundColor = .white
         
-        fetchUser()
-        
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerID")
         
         collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: cellID)
         
+        fetchUser()
         setupLogOutButton()
-        
         fetchPosts()
         }
     
+    // Fetches the User's data from Firebase, stores it in a local variable
+    fileprivate func fetchUser() {
+        let db = Firestore.firestore()
+        let userUID = Auth.auth().currentUser?.uid ?? ""
+        db.collection("users").document(userUID).getDocument { (documentSnapshot, err) in
+            if let err = err {
+                print("Error getting username:",err)
+                return
+            }
+            
+            guard let dictionary = documentSnapshot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+            self.navigationItem.title = self.user?.username
+            self.collectionView.reloadData()
+        }
+    }
+    
+    // Creates the logout button
+    fileprivate func setupLogOutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogout))
+    }
+    
+    // Fetch posts from Firebase
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
@@ -53,10 +74,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         })
     }
     
-    fileprivate func setupLogOutButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogout))
-    }
-    
+    // Logs the user out
     @objc func handleLogout() {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
@@ -115,22 +133,5 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 200)
-    }
-        
-    fileprivate func fetchUser() {
-        let db = Firestore.firestore()
-        let userUID = Auth.auth().currentUser?.uid ?? ""
-        db.collection("users").document(userUID).getDocument { (documentSnapshot, err) in
-            if let err = err {
-                print("Error getting username:",err)
-                return
-            }
-            
-            guard let dictionary = documentSnapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
-            self.navigationItem.title = self.user?.username
-            self.collectionView.reloadData()
-        }
-        
     }
 }
