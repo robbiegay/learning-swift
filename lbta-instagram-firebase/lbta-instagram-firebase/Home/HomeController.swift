@@ -30,21 +30,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
-        var user: User?
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).addSnapshotListener { (snapshot, err) in
-            if let err = err {
-                print("Failed to fetch users:",err)
-            }
-            
-            guard let userDictionary = snapshot?.data() else { return }
-            
-            user = User(dictionary: userDictionary)
-            
-        }
         
-        let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            self.fetchPostsWithUser(user: user)
+        }
+    }
+    
+    fileprivate func fetchPostsWithUser(user: User) {
+        let ref = Firestore.firestore().collection("users").document(user.uid).collection("posts")
         ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
             if let err = err {
                 print("Failed to fetch user posts:",err)
@@ -54,9 +48,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.postsArray.removeAll()
             
             guard let documents = snapshot?.documents else { return }
-            
-            guard let user = user else { return }
-                        
+                                    
             for document in documents {
                 let dictionary = document.data()
                 let post = Post(user: user, dictionary: dictionary)
