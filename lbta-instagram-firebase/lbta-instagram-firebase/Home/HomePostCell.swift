@@ -15,6 +15,14 @@ class HomePostCell: UICollectionViewCell {
             guard let postImageURL = post?.imageURL else { return }
             
             photoImageView.loadImage(urlString: postImageURL)
+            
+            usernameLabel.text = post?.user.username
+            
+            guard let profilePictureURL = post?.user.profilePictureURL else { return }
+            
+            userProfileImageView.loadImage(urlString: profilePictureURL)
+            
+            setupAttributedCaption()
         }
     }
     
@@ -77,16 +85,7 @@ class HomePostCell: UICollectionViewCell {
     let captionLabel: UILabel = {
         let label = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: " Some caption text that will perhaps wrap onto the next line. It is a kind of long caption.", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
-        
-        // Creates small spacing between caption and date posted time
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 4)]))
-        
-        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-        
-        label.attributedText = attributedText
+//        label.attributedText = attributedText
         label.numberOfLines = 0
         
         return label
@@ -114,6 +113,21 @@ class HomePostCell: UICollectionViewCell {
         
         addSubview(captionLabel)
         captionLabel.anchor(top: likeButton.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 8, width: 0, height: 0)
+    }
+    
+    fileprivate func setupAttributedCaption() {
+        guard let post = self.post else { return }
+        
+        let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
+        
+        // Creates small spacing between caption and date posted time
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 4)]))
+        
+        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        
+        captionLabel.attributedText = attributedText
     }
     
     fileprivate func setupActionButtons() {

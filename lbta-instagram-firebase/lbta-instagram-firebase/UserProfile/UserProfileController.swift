@@ -64,10 +64,13 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             guard let documents = snapshot?.documents else { return }
             
+            guard let user = self.user else { return }
+            
             for document in documents {
                 let dictionary = document.data()
-                let post = Post(dictionary: dictionary)
-                self.postsArray.append(post)
+                let post = Post(user: user, dictionary: dictionary)
+                // Puts the users posts in the proper order (new photos first)
+                self.postsArray.insert(post, at: 0)
             }
             
             self.collectionView.reloadData()
