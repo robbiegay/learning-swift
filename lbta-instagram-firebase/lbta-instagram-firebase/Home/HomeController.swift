@@ -31,7 +31,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
+        
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            self.fetchPostsWithUser(user: user)
+        }
+    }
+    
+    fileprivate func fetchPostsWithUser(user: User) {
+        let ref = Firestore.firestore().collection("users").document(user.uid).collection("posts")
         ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
             if let err = err {
                 print("Failed to fetch user posts:",err)
@@ -41,10 +48,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.postsArray.removeAll()
             
             guard let documents = snapshot?.documents else { return }
-            
+                                    
             for document in documents {
                 let dictionary = document.data()
-                let post = Post(dictionary: dictionary)
+                let post = Post(user: user, dictionary: dictionary)
                 self.postsArray.append(post)
             }
             
@@ -54,7 +61,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 200)
+        var height: CGFloat = 40 + 8 + 8 // User photo height + top and bottom padding
+        height += view.frame.width // + the width of the screen (making a square for the photo
+        height += 50 // Adds 50 for the lower controls (like, comment, etc)
+        height += 60 // Space for caption
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

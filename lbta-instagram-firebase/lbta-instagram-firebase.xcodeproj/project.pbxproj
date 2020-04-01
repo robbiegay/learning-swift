@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		452669EF2432757600CBF55A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669EE2432757600CBF55A /* HomeController.swift */; };
 		452669F1243276A900CBF55A /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669F0243276A900CBF55A /* HomePostCell.swift */; };
+		45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D712434D73E00BF50C0 /* UserSearchController.swift */; };
+		45609D742434DAC900BF50C0 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D732434DAC900BF50C0 /* UserSearchCell.swift */; };
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
 		4595CD77242D075B001F1AAE /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */; };
 		4595CD79242D4492001F1AAE /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595CD78242D4492001F1AAE /* PhotoSelectorCell.swift */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		452669EE2432757600CBF55A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		452669F0243276A900CBF55A /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
+		45609D712434D73E00BF50C0 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
+		45609D732434DAC900BF50C0 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		4595CD78242D4492001F1AAE /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
@@ -81,6 +85,15 @@
 				452669F0243276A900CBF55A /* HomePostCell.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		45609D702434D70D00BF50C0 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				45609D712434D73E00BF50C0 /* UserSearchController.swift */,
+				45609D732434DAC900BF50C0 /* UserSearchCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		4595CD75242D0745001F1AAE /* AddPhoto */ = {
@@ -134,6 +147,7 @@
 		45B5CEF92422795900C757EF /* lbta-instagram-firebase */ = {
 			isa = PBXGroup;
 			children = (
+				45609D702434D70D00BF50C0 /* Search */,
 				452669ED2432756600CBF55A /* Home */,
 				45BD4DA1242F9AC30052223F /* Models */,
 				4595CD75242D0745001F1AAE /* AddPhoto */,
@@ -311,12 +325,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45609D742434DAC900BF50C0 /* UserSearchCell.swift in Sources */,
 				45B5CEFB2422795900C757EF /* AppDelegate.swift in Sources */,
 				459F086624253E85007D403B /* UserProfileHeader.swift in Sources */,
 				45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */,
 				4595CD77242D075B001F1AAE /* PhotoSelectorController.swift in Sources */,
 				459F08632425276A007D403B /* UserProfileController.swift in Sources */,
 				45BD4DA3242F9AD20052223F /* Post.swift in Sources */,
+				45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */,
 				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
 				452669F1243276A900CBF55A /* HomePostCell.swift in Sources */,
 				45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */,

@@ -9,6 +9,8 @@
 import Foundation
 
 struct Post {
+    let user: User
+    
     let imageURL: String
     let caption: String
     let creationDate: String
@@ -17,7 +19,9 @@ struct Post {
     
     // Creates an initializer, that takes in a dict and pulls things
     // like imageURL as String, or "" if no match found
-    init(dictionary: [String: Any]) {
+    init(user: User, dictionary: [String: Any]) {
+        self.user = user
+        
         self.imageURL = dictionary["imageURL"] as? String ?? ""
         self.caption = dictionary["caption"] as? String ?? ""
         self.creationDate = dictionary["creationDate"] as? String ?? ""

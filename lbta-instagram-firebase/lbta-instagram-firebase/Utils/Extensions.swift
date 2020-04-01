@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
@@ -41,6 +42,23 @@ extension UIView {
         
         if height != 0 {
             heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+    }
+}
+
+extension Database {
+    static func fetchUserWithUID(uid: String, completion: @escaping (User) -> ()) {
+        Firestore.firestore().collection("users").document(uid).addSnapshotListener { (snapshot, err) in
+            if let err = err {
+                print("Failed to fetch users:",err)
+            }
+            
+            guard let userDictionary = snapshot?.data() else { return }
+            
+            let user = User(uid: uid, dictionary: userDictionary)
+                        
+            // How to create a custom completion block
+            completion(user)
         }
     }
 }

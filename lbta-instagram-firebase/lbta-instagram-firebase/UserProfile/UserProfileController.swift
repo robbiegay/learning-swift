@@ -31,15 +31,15 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     // Fetches the User's data from Firebase, stores it in a local variable
     fileprivate func fetchUser() {
         let db = Firestore.firestore()
-        let userUID = Auth.auth().currentUser?.uid ?? ""
-        db.collection("users").document(userUID).getDocument { (documentSnapshot, err) in
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        db.collection("users").document(uid).getDocument { (documentSnapshot, err) in
             if let err = err {
                 print("Error getting username:",err)
                 return
             }
             
             guard let dictionary = documentSnapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
+            self.user = User(uid: uid, dictionary: dictionary)
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
         }
@@ -53,6 +53,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     // Fetch posts from Firebase
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+//        Database.fetchUserWithUID(uid: uid) { (user) in
+//            self.user = user
+//            self.navigationItem.title = user.username
+//        }
+        
         let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
         ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
             if let err = err {
@@ -64,10 +70,13 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             
             guard let documents = snapshot?.documents else { return }
             
+            guard let user = self.user else { return }
+            
             for document in documents {
                 let dictionary = document.data()
-                let post = Post(dictionary: dictionary)
-                self.postsArray.append(post)
+                let post = Post(user: user, dictionary: dictionary)
+                // Puts the users posts in the proper order (new photos first)
+                self.postsArray.insert(post, at: 0)
             }
             
             self.collectionView.reloadData()
