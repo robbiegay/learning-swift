@@ -16,8 +16,8 @@ class CustomImageView: UIImageView {
     
     func loadImage(urlString: String) {
         
-        // check to see if the image is already cached, saving from reloading
-        // over and over again
+        // If an image in the cache exisits that matchs the image url,
+        // load the image from the cache and return out of the loadImage func
         if let cachedImage = imageCache[urlString] {
             self.image = cachedImage
             return
@@ -46,3 +46,6 @@ class CustomImageView: UIImageView {
         }.resume()
     }
 }
+
+
+
