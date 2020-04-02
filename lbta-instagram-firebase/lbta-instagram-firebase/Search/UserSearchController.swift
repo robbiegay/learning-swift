@@ -50,8 +50,27 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         
         // Allows you to scroll even if the screen doesn't overflow with content
         collectionView.alwaysBounceVertical = true
+        // Dismesses keyboard when dragging the view
+        collectionView.keyboardDismissMode = .onDrag
         
         fetchUsers()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        searchBar.isHidden = true
+        // This hides the keyboard when you click on a row
+        searchBar.resignFirstResponder()
+        
+        let user = filteredUsers[indexPath.item]
+        
+        let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        userProfileController.userID = user.uid
+        navigationController?.pushViewController(userProfileController, animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchBar.isHidden = false
     }
     
     fileprivate func fetchUsers() {
@@ -63,9 +82,14 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             guard let documents = snapshot?.documents else { return }
             
             for document in documents {
+                let uid = document.documentID
                 
-                let user = User(uid: document.documentID, dictionary: document.data())
-                self.users.append(user)
+                if uid == Auth.auth().currentUser?.uid {
+                    print("Found myself, omit from list")
+                } else {
+                    let user = User(uid: uid, dictionary: document.data())
+                    self.users.append(user)
+                }
             }
 
             self.users.sort { (u1, u2) -> Bool in

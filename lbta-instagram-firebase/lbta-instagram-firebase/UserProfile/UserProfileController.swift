@@ -14,6 +14,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     let cellID = "cellID"
     var postsArray = [Post]()
     var user: User?
+    var userID: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +26,13 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         fetchUser()
         setupLogOutButton()
-        fetchPosts()
         }
     
     // Fetches the User's data from Firebase, stores it in a local variable
     fileprivate func fetchUser() {
         let db = Firestore.firestore()
-        let uid = Auth.auth().currentUser?.uid ?? ""
+        // First: check for a inputed uid, then use auth.uid, then default to ""
+        let uid = userID ?? Auth.auth().currentUser?.uid ?? ""
         db.collection("users").document(uid).getDocument { (documentSnapshot, err) in
             if let err = err {
                 print("Error getting username:",err)
@@ -42,6 +43,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.user = User(uid: uid, dictionary: dictionary)
             self.navigationItem.title = self.user?.username
             self.collectionView.reloadData()
+            
+            self.fetchPosts()
         }
     }
     
@@ -52,12 +55,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     // Fetch posts from Firebase
     fileprivate func fetchPosts() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-//        Database.fetchUserWithUID(uid: uid) { (user) in
-//            self.user = user
-//            self.navigationItem.title = user.username
-//        }
+        guard let uid = user?.uid else { return }
         
         let ref = Firestore.firestore().collection("users").document(uid).collection("posts")
         ref.order(by: "creationDate").addSnapshotListener({ (snapshot, err) in
