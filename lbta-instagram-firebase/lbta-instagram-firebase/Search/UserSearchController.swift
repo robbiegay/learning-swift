@@ -79,6 +79,9 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
                 print("Failed the fetch users for search:",err)
             }
             
+            // Clears users array each time the array of users is being loaded
+            self.users.removeAll()
+            
             guard let documents = snapshot?.documents else { return }
             
             for document in documents {

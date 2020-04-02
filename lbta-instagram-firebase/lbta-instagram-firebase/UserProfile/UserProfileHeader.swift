@@ -18,6 +18,8 @@ class UserProfileHeader: UICollectionViewCell {
             profileImageView.loadImage(urlString: profileImageURL)
             
             usernameLabel.text = user?.username
+            
+            setupEditFollowButton()
         }
     }
     
@@ -103,7 +105,8 @@ class UserProfileHeader: UICollectionViewCell {
         return label
     }()
     
-    let editProfileButton: UIButton = {
+    // Since we updated the title above, we have to make this a "lazy var"
+    lazy var editProfileFollowButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Edit Profile", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -111,8 +114,78 @@ class UserProfileHeader: UICollectionViewCell {
         button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 3
+        button.addTarget(self, action: #selector(handleEditProfileOrFollow), for: .touchUpInside)
         return button
     }()
+    
+    fileprivate func setupEditFollowButton() {
+        guard let currentLoggedInUserID = Auth.auth().currentUser?.uid else { return }
+        guard let userID = user?.uid else { return }
+        
+        if currentLoggedInUserID == userID {
+            editProfileFollowButton.setTitle("Edit Profile", for: .normal)
+        } else {
+            
+            // check if following user
+            Firestore.firestore().collection("users").document(currentLoggedInUserID).getDocument { (snapshot, err) in
+                if let err = err {
+                    print("Failed to check if following:",err)
+                }
+                let followingArray = snapshot?.data()?["following"] as! [String]
+                let isFollowing = followingArray.contains(userID)
+                
+                if isFollowing {
+                    self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                    self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+                } else {
+                    self.setupFollowStyle()
+                }
+            }
+        }
+    }
+    
+    @objc func handleEditProfileOrFollow() {
+        guard let currentLoggedInUserId = Auth.auth().currentUser?.uid else { return }
+        guard let userId = user?.uid else { return }
+        
+        let ref = Firestore.firestore().collection("users").document(currentLoggedInUserId)
+        
+        // Follow User
+        if editProfileFollowButton.titleLabel?.text == "Follow" {
+            // arrayUnion joins the array values
+            let values = ["following": FieldValue.arrayUnion([userId])]
+            ref.setData(values, merge: true) { (err) in
+                if let err = err {
+                    print("Faield to follow user",err)
+                }
+                
+                print("Succesfully followed user:",userId)
+                self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                self.editProfileFollowButton.backgroundColor = .white
+                self.editProfileFollowButton.setTitleColor(.black, for: .normal)
+                self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+            }
+        // Unfollow User
+        } else {
+            // arrayRemove removes a value from the array
+            let values = ["following": FieldValue.arrayRemove([userId])]
+            ref.setData(values, merge: true) { (err) in
+                if let err = err {
+                    print("Faield to unfollow user",err)
+                }
+                
+                print("Succesfully unfollowed user:",userId)
+                self.setupFollowStyle()
+            }
+        }
+    }
+    
+    fileprivate func setupFollowStyle() {
+        self.editProfileFollowButton.setTitle("Follow", for: .normal)
+        self.editProfileFollowButton.backgroundColor = instagramButtonActiveColor
+        self.editProfileFollowButton.setTitleColor(.white, for: .normal)
+        self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -129,8 +202,8 @@ class UserProfileHeader: UICollectionViewCell {
         
         setupUserStatsView()
         
-        addSubview(editProfileButton)
-        editProfileButton.anchor(top: postsLabel.bottomAnchor, left: postsLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
+        addSubview(editProfileFollowButton)
+        editProfileFollowButton.anchor(top: postsLabel.bottomAnchor, left: postsLabel.leftAnchor, bottom: nil, right: followingLabel.rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 34)
     }
     
     fileprivate func setupUserStatsView() {
