@@ -1,10 +1,10 @@
 # Learning Swift
 
-This repo contains several projects that I have built to help be learn and better understand Swift, Xcode, and mobile app development.
+This repo contains several projects that I have built to help me learn and better understand Swift, Xcode, and mobile app development.
 
 The app I am currently working on is a clone of the Instagram app, with backend data being hosted on Firebase.
 
-You can watch a video demo of this app here: [Instagram Clone – YouTube]()
+You can watch a video demo of this app here: [Instagram Clone – YouTube](https://www.youtube.com/watch?v=tRLZppAY7Ik)
 
 ## Built With
 
