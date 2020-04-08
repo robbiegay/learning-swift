@@ -13,7 +13,7 @@ struct Post {
     
     let imageURL: String
     let caption: String
-    let creationDate: String
+    let creationDate: Date
     let imageHeight: String
     let imageWidth: String
     
@@ -24,7 +24,8 @@ struct Post {
         
         self.imageURL = dictionary["imageURL"] as? String ?? ""
         self.caption = dictionary["caption"] as? String ?? ""
-        self.creationDate = dictionary["creationDate"] as? String ?? ""
+        let secondsFrom1970 = dictionary["creationDate"] as? Double ?? 0
+        self.creationDate = Date(timeIntervalSince1970: secondsFrom1970)
         self.imageHeight = dictionary["imageHeight"] as? String ?? ""
         self.imageWidth = dictionary["imageWidth"] as? String ?? ""
     }
