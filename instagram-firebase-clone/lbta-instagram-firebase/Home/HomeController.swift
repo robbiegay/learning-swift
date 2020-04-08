@@ -31,7 +31,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func fetchPosts() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Error fetching follwed users:",err)
+            }
+            let followingArray = snapshot?.data()?["following"] as! [String]
+            for profileUid in followingArray {
+                Database.fetchUserWithUID(uid: profileUid) { (user) in
+                    self.fetchPostsWithUser(user: user)
+                }
+            }
+        }
         
+        // Fetch logged in user posts as well
         Database.fetchUserWithUID(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
         }
@@ -45,7 +57,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             
             // Clears the post array when the snapshot listener is triggered
-            self.postsArray.removeAll()
+//            self.postsArray.removeAll()
             
             guard let documents = snapshot?.documents else { return }
                                     
@@ -53,6 +65,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 let dictionary = document.data()
                 let post = Post(user: user, dictionary: dictionary)
                 self.postsArray.append(post)
+            }
+            
+            self.postsArray.sort { (p1, p2) -> Bool in
+                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
             }
             
             self.collectionView.reloadData()
