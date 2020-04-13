@@ -17,11 +17,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRefresh), name: SharePhotoController.updateFeedNotificationName, object: nil)
+        
         collectionView.backgroundColor = .white
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellID)
         
         setupNavigationItems()
+        fetchPosts()
+    }
+    
+    @objc func handleRefresh() {
         fetchPosts()
     }
     
@@ -30,11 +40,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
+        postsArray.removeAll()
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
                 print("Error fetching follwed users:",err)
             }
+            self.collectionView.refreshControl?.endRefreshing()
+            
             let followingArray = snapshot?.data()?["following"] as! [String]
             for profileUid in followingArray {
                 Database.fetchUserWithUID(uid: profileUid) { (user) in
