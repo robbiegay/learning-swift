@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EAEC38EF324622D616C0E8E /* Pods_lbta_instagram_firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28E9E3C223A926DFF531D559 /* Pods_lbta_instagram_firebase.framework */; };
 		452669EF2432757600CBF55A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669EE2432757600CBF55A /* HomeController.swift */; };
 		452669F1243276A900CBF55A /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669F0243276A900CBF55A /* HomePostCell.swift */; };
 		45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D712434D73E00BF50C0 /* UserSearchController.swift */; };
@@ -33,10 +32,10 @@
 		45BD4DA9242FB42B0052223F /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD4DA8242FB42B0052223F /* CustomImageView.swift */; };
 		45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6F4C8242E4D8F00893585 /* SharePhotoController.swift */; };
 		45DD35532445270600703104 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD35522445270600703104 /* CameraController.swift */; };
+		64394D2B3DB66B5FF920EDA3 /* libPods-lbta-instagram-firebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EA58177D27A47494A531308 /* libPods-lbta-instagram-firebase.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		28E9E3C223A926DFF531D559 /* Pods_lbta_instagram_firebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lbta_instagram_firebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		452669EE2432757600CBF55A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		452669F0243276A900CBF55A /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		45609D712434D73E00BF50C0 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
@@ -49,7 +48,7 @@
 		459F08622425276A007D403B /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		459F086524253E85007D403B /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		45B2A7A7242960E800F072D1 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "lbta-instagram-firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		45B5CEF72422795900C757EF /* InstaClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45B5CEFA2422795900C757EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45B5CEFC2422795900C757EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		45B5CF002422795900C757EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		45BD4DA8242FB42B0052223F /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		45D6F4C8242E4D8F00893585 /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		45DD35522445270600703104 /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		6EA58177D27A47494A531308 /* libPods-lbta-instagram-firebase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-lbta-instagram-firebase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC45A3F6D8A3D5AF631DAAAD /* Pods-lbta-instagram-firebase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lbta-instagram-firebase.debug.xcconfig"; path = "Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase.debug.xcconfig"; sourceTree = "<group>"; };
 		F3589FABB2452E16289A1909 /* Pods-lbta-instagram-firebase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lbta-instagram-firebase.release.xcconfig"; path = "Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EAEC38EF324622D616C0E8E /* Pods_lbta_instagram_firebase.framework in Frameworks */,
+				64394D2B3DB66B5FF920EDA3 /* libPods-lbta-instagram-firebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +141,7 @@
 		45B5CEF82422795900C757EF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */,
+				45B5CEF72422795900C757EF /* InstaClone.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,7 +206,7 @@
 		5D5C52CB7437183A73A6B5DB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				28E9E3C223A926DFF531D559 /* Pods_lbta_instagram_firebase.framework */,
+				6EA58177D27A47494A531308 /* libPods-lbta-instagram-firebase.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -231,7 +231,7 @@
 				45B5CEF32422795900C757EF /* Sources */,
 				45B5CEF42422795900C757EF /* Frameworks */,
 				45B5CEF52422795900C757EF /* Resources */,
-				493C3C5A5EC89BF351A867A4 /* [CP] Embed Pods Frameworks */,
+				AFCF3A4D74571094C3B1F5BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,7 +239,7 @@
 			);
 			name = "lbta-instagram-firebase";
 			productName = "lbta-instagram-firebase";
-			productReference = 45B5CEF72422795900C757EF /* lbta-instagram-firebase.app */;
+			productReference = 45B5CEF72422795900C757EF /* InstaClone.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -290,23 +290,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		493C3C5A5EC89BF351A867A4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4B3EEDF206568C5A7774BFBC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -327,6 +310,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFCF3A4D74571094C3B1F5BD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-lbta-instagram-firebase/Pods-lbta-instagram-firebase-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -503,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robbiegay.lbta-instagram-firebase";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InstaClone;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -524,7 +524,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.robbiegay.lbta-instagram-firebase";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = InstaClone;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
