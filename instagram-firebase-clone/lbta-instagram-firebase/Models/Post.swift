@@ -10,6 +10,7 @@ import Foundation
 
 struct Post {
     let user: User
+    var id: String?
     
     let imageURL: String
     let caption: String

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
     let cellID = "cellID"
     var postsArray = [Post]()
@@ -43,6 +43,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleCamera() {
         let cameraController = CameraController()
+        // Allows you to make custom transitions
+        cameraController.modalPresentationStyle = .fullScreen
         present(cameraController, animated: true, completion: nil)
     }
     
@@ -84,7 +86,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                                     
             for document in documents {
                 let dictionary = document.data()
-                let post = Post(user: user, dictionary: dictionary)
+                var post = Post(user: user, dictionary: dictionary)
+                post.id = document.documentID
                 self.postsArray.append(post)
             }
             
@@ -115,6 +118,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         cell.post = postsArray[indexPath.item]
         
+        cell.delegate = self
+        
         return cell
+    }
+    
+    func didTapComment(post: Post) {
+        print("Clicked on post with caption:",post.caption)
+        
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewLayout())
+        commentsController.post = post
+        
+        navigationController?.pushViewController(commentsController, animated: true)
     }
 }
