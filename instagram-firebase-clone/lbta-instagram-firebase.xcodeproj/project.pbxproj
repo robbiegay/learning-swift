@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4525E00F2446482900A03A08 /* CustomAnimationDismisser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4525E00E2446482900A03A08 /* CustomAnimationDismisser.swift */; };
 		452669EF2432757600CBF55A /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669EE2432757600CBF55A /* HomeController.swift */; };
 		452669F1243276A900CBF55A /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452669F0243276A900CBF55A /* HomePostCell.swift */; };
 		4551B1CD24461BC1004F21E7 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551B1CC24461BC1004F21E7 /* PreviewPhotoContainerView.swift */; };
+		4551B1CF24463C98004F21E7 /* CustomAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551B1CE24463C98004F21E7 /* CustomAnimationPresenter.swift */; };
 		45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D712434D73E00BF50C0 /* UserSearchController.swift */; };
 		45609D742434DAC900BF50C0 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D732434DAC900BF50C0 /* UserSearchCell.swift */; };
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
@@ -37,9 +39,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4525E00E2446482900A03A08 /* CustomAnimationDismisser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationDismisser.swift; sourceTree = "<group>"; };
 		452669EE2432757600CBF55A /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		452669F0243276A900CBF55A /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		4551B1CC24461BC1004F21E7 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
+		4551B1CE24463C98004F21E7 /* CustomAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationPresenter.swift; sourceTree = "<group>"; };
 		45609D712434D73E00BF50C0 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		45609D732434DAC900BF50C0 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -202,6 +206,8 @@
 			children = (
 				45DD35522445270600703104 /* CameraController.swift */,
 				4551B1CC24461BC1004F21E7 /* PreviewPhotoContainerView.swift */,
+				4551B1CE24463C98004F21E7 /* CustomAnimationPresenter.swift */,
+				4525E00E2446482900A03A08 /* CustomAnimationDismisser.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				45B5CEFD2422795900C757EF /* SceneDelegate.swift in Sources */,
 				4595CD77242D075B001F1AAE /* PhotoSelectorController.swift in Sources */,
 				459F08632425276A007D403B /* UserProfileController.swift in Sources */,
+				4551B1CF24463C98004F21E7 /* CustomAnimationPresenter.swift in Sources */,
 				45BD4DA3242F9AD20052223F /* Post.swift in Sources */,
 				45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */,
 				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
@@ -353,6 +360,7 @@
 				45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */,
 				452669EF2432757600CBF55A /* HomeController.swift in Sources */,
 				45BD4DA7242FA7BA0052223F /* User.swift in Sources */,
+				4525E00F2446482900A03A08 /* CustomAnimationDismisser.swift in Sources */,
 				45BD4DA9242FB42B0052223F /* CustomImageView.swift in Sources */,
 				4595CD7B242D4D03001F1AAE /* PhotoSelectorHeader.swift in Sources */,
 				4551B1CD24461BC1004F21E7 /* PreviewPhotoContainerView.swift in Sources */,

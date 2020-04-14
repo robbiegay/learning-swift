@@ -43,6 +43,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleCamera() {
         let cameraController = CameraController()
+        // Allows you to make custom transitions
+        cameraController.modalPresentationStyle = .fullScreen
         present(cameraController, animated: true, completion: nil)
     }
     
