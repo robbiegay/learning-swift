@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
     let cellID = "cellID"
     var postsArray = [Post]()
@@ -117,6 +117,16 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         cell.post = postsArray[indexPath.item]
         
+        cell.delegate = self
+        
         return cell
+    }
+    
+    func didTapComment(post: Post) {
+        print("Clicked on post with caption:",post.caption)
+        
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewLayout())
+        
+        navigationController?.pushViewController(commentsController, animated: true)
     }
 }
