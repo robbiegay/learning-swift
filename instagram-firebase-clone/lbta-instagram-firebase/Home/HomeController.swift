@@ -37,6 +37,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func setupNavigationItems() {
         navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "logo2"))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "camera").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
+    }
+    
+    @objc func handleCamera() {
+        let cameraController = CameraController()
+        present(cameraController, animated: true, completion: nil)
     }
     
     fileprivate func fetchPosts() {
