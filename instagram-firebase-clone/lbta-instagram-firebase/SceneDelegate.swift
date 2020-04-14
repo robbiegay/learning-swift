@@ -12,6 +12,10 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+//    App Icon Attribution:
+//    Icons made by Pixel Perfect: https://www.flaticon.com/authors/pixel-perfect
+//    From flaticon.com: https://www.flaticon.com/
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

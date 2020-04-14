@@ -20,8 +20,9 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     let dismissButton: UIButton = {
         let  button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "arrow.right").withRenderingMode(.alwaysOriginal), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "arrow.right"), for: .normal)
         button.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
+        button.tintColor = .white
         return button
     }()
     
@@ -59,11 +60,11 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         
         let previewImage = UIImage(data: data!)
         
-        let previewImageView = UIImageView(image: previewImage)
-        view.addSubview(previewImageView)
-        previewImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        print("Finished processing photo sample buffer...")
+        let containerView = PreviewPhotoContainerView()
+        containerView.previewImageView.image = previewImage
+
+        view.addSubview(containerView)
+        containerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     @objc func handleDismiss() {
