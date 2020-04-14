@@ -86,7 +86,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                                     
             for document in documents {
                 let dictionary = document.data()
-                let post = Post(user: user, dictionary: dictionary)
+                var post = Post(user: user, dictionary: dictionary)
+                post.id = document.documentID
                 self.postsArray.append(post)
             }
             
@@ -126,6 +127,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         print("Clicked on post with caption:",post.caption)
         
         let commentsController = CommentsController(collectionViewLayout: UICollectionViewLayout())
+        commentsController.post = post
         
         navigationController?.pushViewController(commentsController, animated: true)
     }
