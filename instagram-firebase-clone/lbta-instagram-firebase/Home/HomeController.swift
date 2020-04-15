@@ -91,10 +91,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 post.id = document.documentID
                 guard let postId = post.id else { return }
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
-                                
-                print("user id:",user.uid)
-                print("post id:",postId)
-                print("current user:",currentUserUid)
                 Firestore.firestore().collection("users").document(user.uid).collection("posts").document(postId).collection("likes").document(currentUserUid).getDocument { (snapshot, err) in
                         if let err = err {
                             print("Failed to fetch likes:",err)
