@@ -76,6 +76,8 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
         
         let data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!)
         
+
+        
         let previewImage = UIImage(data: data!)
         
         let containerView = PreviewPhotoContainerView()
