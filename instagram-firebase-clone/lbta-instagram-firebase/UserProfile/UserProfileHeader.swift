@@ -10,7 +10,14 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
+protocol userProfileHeaderDelegate {
+    func didChangeToListView()
+    func didChangeToGridView()
+}
+
 class UserProfileHeader: UICollectionViewCell {
+    
+    var delegate: userProfileHeaderDelegate?
     
     var user: User? {
         didSet {
@@ -29,16 +36,19 @@ class UserProfileHeader: UICollectionViewCell {
         return iv
     }()
     
-    let gridButton: UIButton = {
+    lazy var gridButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "grid"), for: .normal)
+        button.addTarget(self, action: #selector(handleChangeToGridView), for: .touchUpInside)
         return button
     }()
     
-    let listButton: UIButton = {
+    // Must be lazy var in order to add target
+    lazy var listButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "list"), for: .normal)
         button.tintColor = UIColor(white: 0, alpha: 0.2)
+        button.addTarget(self, action: #selector(handleChangeToListView), for: .touchUpInside)
         return button
     }()
     
@@ -178,6 +188,20 @@ class UserProfileHeader: UICollectionViewCell {
                 self.setupFollowStyle()
             }
         }
+    }
+    
+    @objc func handleChangeToGridView() {
+        print("changing to grid view...")
+        gridButton.tintColor = .mainBlue()
+        listButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToGridView()
+    }
+    
+    @objc func handleChangeToListView() {
+        print("changing to list view...")
+        listButton.tintColor = .mainBlue()
+        gridButton.tintColor = UIColor(white: 0, alpha: 0.2)
+        delegate?.didChangeToListView()
     }
     
     fileprivate func setupFollowStyle() {
