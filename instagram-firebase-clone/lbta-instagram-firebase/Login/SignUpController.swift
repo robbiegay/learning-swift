@@ -186,7 +186,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                     
                     let values = ["username": username, "profilePictureURL": profilePictureURL]
                     let db = Firestore.firestore()
-                    db.collection("users").document(uid).setData(values) { (err) in
+                    db.collection("users").document(uid).setData(values as [String : Any]) { (err) in
                         if let err = err {
                             print("Failed to save user info into db:",err)
                             return

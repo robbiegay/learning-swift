@@ -89,7 +89,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         let dummyCell = CommentCell(frame: frame)
         dummyCell.comment = comments[indexPath.item]
-        print(dummyCell.profileImageView.image)
+        print(dummyCell.profileImageView.image ?? "")
         dummyCell.layoutIfNeeded()
         
         let targetSize = CGSize(width: view.frame.width, height: 1000)
@@ -142,8 +142,8 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     
     @objc func handleSubmit() {
         let values = [
-            "text": commentTextField.text,
-            "userId": Auth.auth().currentUser?.uid,
+            "text": commentTextField.text ?? "",
+            "userId": Auth.auth().currentUser?.uid ?? "",
             "creationDate": Date().timeIntervalSince1970
         ] as [String : Any]
         
