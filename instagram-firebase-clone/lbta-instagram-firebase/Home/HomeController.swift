@@ -58,7 +58,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             self.collectionView.refreshControl?.endRefreshing()
             
-            let followingArray = snapshot?.data()?["following"] as! [String]
+            guard let followingArray = snapshot?.data()?["following"] as? [String] else { return }
+            
             for profileUid in followingArray {
                 Database.fetchUserWithUID(uid: profileUid) { (user) in
                     self.fetchPostsWithUser(user: user)

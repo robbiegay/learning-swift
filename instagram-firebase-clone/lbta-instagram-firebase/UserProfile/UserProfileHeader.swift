@@ -131,7 +131,7 @@ class UserProfileHeader: UICollectionViewCell {
                 if let err = err {
                     print("Failed to check if following:",err)
                 }
-                let followingArray = snapshot?.data()?["following"] as! [String]
+                guard let followingArray = snapshot?.data()?["following"] as? [String] else { return }
                 let isFollowing = followingArray.contains(userID)
                 
                 if isFollowing {
