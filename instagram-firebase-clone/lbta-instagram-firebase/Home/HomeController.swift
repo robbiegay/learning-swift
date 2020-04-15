@@ -58,7 +58,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             self.collectionView.refreshControl?.endRefreshing()
             
-            let followingArray = snapshot?.data()?["following"] as! [String]
+            guard let followingArray = snapshot?.data()?["following"] as? [String] else { return }
+            
             for profileUid in followingArray {
                 Database.fetchUserWithUID(uid: profileUid) { (user) in
                     self.fetchPostsWithUser(user: user)
@@ -80,19 +81,34 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             }
             
             // Clears the post array when the snapshot listener is triggered
-//            self.postsArray.removeAll()
+            //            self.postsArray.removeAll()
             
             guard let documents = snapshot?.documents else { return }
-                                    
+            
             for document in documents {
                 let dictionary = document.data()
                 var post = Post(user: user, dictionary: dictionary)
                 post.id = document.documentID
-                self.postsArray.append(post)
-            }
-            
-            self.postsArray.sort { (p1, p2) -> Bool in
-                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+                guard let postId = post.id else { return }
+                guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+                Firestore.firestore().collection("users").document(user.uid).collection("posts").document(postId).collection("likes").document(currentUserUid).getDocument { (snapshot, err) in
+                        if let err = err {
+                            print("Failed to fetch likes:",err)
+                            return
+                        }
+                                                                    
+                        if let value = snapshot?.data()?[currentUserUid] as? Int, value == 1 {
+                            post.hasLiked = true
+                        } else {
+                            post.hasLiked = false
+                        }
+                        
+                        self.postsArray.append(post)
+                        
+                        self.postsArray.sort { (p1, p2) -> Bool in
+                            return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+                        }
+                    }
             }
             
             self.collectionView.reloadData()
@@ -126,9 +142,35 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func didTapComment(post: Post) {
         print("Clicked on post with caption:",post.caption)
         
-        let commentsController = CommentsController(collectionViewLayout: UICollectionViewLayout())
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
         commentsController.post = post
         
         navigationController?.pushViewController(commentsController, animated: true)
+    }
+    
+    func didLike(for cell: HomePostCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        
+        var post = self.postsArray[indexPath.item]
+        
+        guard let postId = post.id else { return }
+        
+        guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
+        
+        let values = [currentUserUid : post.hasLiked == true ? 0 : 1]
+        Firestore.firestore().collection("users").document(post.user.uid).collection("posts").document(postId).collection("likes").document(currentUserUid).setData(values) { (err) in
+            if let err = err {
+                print("Failed to like photo:",err)
+                return
+            }
+            
+            print("Successfully liked photo.")
+            
+            post.hasLiked = !post.hasLiked
+            
+            self.postsArray[indexPath.item] = post
+            
+            self.collectionView.reloadItems(at: [indexPath])
+        }
     }
 }

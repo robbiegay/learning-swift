@@ -18,6 +18,8 @@ struct Post {
     let imageHeight: String
     let imageWidth: String
     
+    var hasLiked = false
+    
     // Creates an initializer, that takes in a dict and pulls things
     // like imageURL as String, or "" if no match found
     init(user: User, dictionary: [String: Any]) {
