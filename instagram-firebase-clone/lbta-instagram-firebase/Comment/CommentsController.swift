@@ -9,15 +9,63 @@
 import UIKit
 import Firebase
 
-class CommentsController: UICollectionViewController {
+class CommentsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     var post: Post?
+    var comments = [Comment]()
+    
+    let cellID = "cellID"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "Comments"
         
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .red
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
+        
+        collectionView.register(CommentCell.self, forCellWithReuseIdentifier: cellID)
+        
+        
+        fetchComments()
+    }
+    
+    fileprivate func fetchComments() {
+        guard let userUid = post?.user.uid else { return }
+        guard let postId = post?.id else { return }
+        let ref = Firestore.firestore().collection("users").document(userUid).collection("posts").document(postId).collection("comments")
+        
+        ref.getDocuments { (snapshot, err) in
+            if let err = err {
+                print("Failed to fetch comments",err)
+            }
+            
+            guard let documents = snapshot?.documents else { return }
+                        
+            for document in documents {
+                let comment = Comment(dictionary: document.data())
+                self.comments.append(comment)
+            }
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return comments.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CommentCell
+        
+        cell.comment = self.comments[indexPath.item]
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     override func viewWillAppear(_ animated: Bool) {

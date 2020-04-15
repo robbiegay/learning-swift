@@ -126,7 +126,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func didTapComment(post: Post) {
         print("Clicked on post with caption:",post.caption)
         
-        let commentsController = CommentsController(collectionViewLayout: UICollectionViewLayout())
+        let commentsController = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
         commentsController.post = post
         
         navigationController?.pushViewController(commentsController, animated: true)
