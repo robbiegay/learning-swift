@@ -157,6 +157,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
             print("Successfully added comment.")
         }
         
+        commentTextField.text = nil
     }
     
     override var inputAccessoryView: UIView? {
