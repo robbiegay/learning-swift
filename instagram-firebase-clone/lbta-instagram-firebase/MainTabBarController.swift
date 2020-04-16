@@ -55,7 +55,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let newPostNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "plus.square"), selectedImage: #imageLiteral(resourceName: "plus.square"))
         
         // Notifications
-        let notificationsNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "heart"), selectedImage: #imageLiteral(resourceName: "heart.fill"))
+        let notificationsNavController = templateNavController(unselectedImage: #imageLiteral(resourceName: "heart"), selectedImage: #imageLiteral(resourceName: "heart.fill"), rootViewController: NotificationsController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         // User Profile
         let layout = UICollectionViewFlowLayout()
