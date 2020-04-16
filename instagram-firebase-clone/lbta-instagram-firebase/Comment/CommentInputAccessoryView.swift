@@ -18,12 +18,14 @@ class CommentInputAccessoryView: UIView {
 
     func clearCommentField() {
         commentTextField.text = nil
+        commentTextField.showPlaceholderLabel()
     }
     
-    fileprivate let commentTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Enter Comment"
-        return tf
+    fileprivate let commentTextField: CommentInputTextView = {
+        let tv = CommentInputTextView()
+        tv.isScrollEnabled = false
+        tv.font = UIFont.systemFont(ofSize: 18)
+        return tv
     }()
 
     fileprivate let submitButton: UIButton = {
@@ -38,15 +40,29 @@ class CommentInputAccessoryView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        // Step one for multiline comment
+        autoresizingMask = .flexibleHeight
+        
         backgroundColor = .white
         
         addSubview(submitButton)
-        submitButton.anchor(top: topAnchor, left: nil, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 0)
+        submitButton.anchor(top: topAnchor, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 50)
 
         addSubview(commentTextField)
-        commentTextField.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        // Step 3 for multiline
+        if #available(iOS 11.0, *) {
+            commentTextField.anchor(top: topAnchor, left: leftAnchor, bottom: safeAreaLayoutGuide.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 0, width: 0, height: 0)
+        } else {
+            commentTextField.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: submitButton.leftAnchor, paddingTop: 8, paddingLeft: 8, paddingBottom: 8, paddingRight: 0, width: 0, height: 0)
+        }
 
         setupLineSeperatorView()
+    }
+    
+    // Step 2 for multiline
+    // Allows program to resize itself as it sees fit
+    override var intrinsicContentSize: CGSize {
+        return .zero
     }
     
     fileprivate func setupLineSeperatorView() {
