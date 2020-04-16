@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CommentsController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class CommentsController: UICollectionViewController, UICollectionViewDelegateFlowLayout, CommentInputAccessoryViewDelegate {
     var post: Post?
     var comments = [Comment]()
     
@@ -48,19 +48,6 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
             for document in documents {
                 
                 let comment = Comment(dictionary: document.data())
-                
-//                Possible use this to move the firebase call over to here
-//                let group = DispatchGroup()
-//                group.enter()
-//
-//                DispatchQueue.main.async {
-//                    // code
-//                    group.leave()
-//                }
-//
-//                group.notify(queue: .main) {
-//                    self.comments.append(comment)
-//                }
                                    
                 self.comments.append(comment)
             }
@@ -89,13 +76,11 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         let dummyCell = CommentCell(frame: frame)
         dummyCell.comment = comments[indexPath.item]
-        print(dummyCell.profileImageView.image ?? "")
         dummyCell.layoutIfNeeded()
         
         let targetSize = CGSize(width: view.frame.width, height: 1000)
         let estimatedSize = dummyCell.systemLayoutSizeFitting(targetSize)
         
-        print("estimated size is:",estimatedSize.height)
         let height = max(40 + 8 + 8, estimatedSize.height)
         return CGSize(width: view.frame.width, height: height)
     }
@@ -110,55 +95,33 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         tabBarController?.tabBar.isHidden = false
     }
     
-    let commentTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "Enter Comment"
-        return tf
+    lazy var containerView: CommentInputAccessoryView = {
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        let commentInputAccessoryView = CommentInputAccessoryView(frame: frame)
+        commentInputAccessoryView.delegate = self
+        return commentInputAccessoryView
     }()
     
-    lazy var containerView: UIView = {
-        let containerView = UIView()
-        containerView.backgroundColor = .white
-        containerView.frame = CGRect(x: 0, y: 0, width: 100, height: 50)
-        
-        let lineSeperatorView = UIView()
-        lineSeperatorView.backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
-        containerView.addSubview(lineSeperatorView)
-        lineSeperatorView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5)
-        
-        let submitButton = UIButton(type: .system)
-        submitButton.setTitle("Submit", for: .normal)
-        submitButton.setTitleColor(.black, for: .normal)
-        submitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        submitButton.addTarget(self, action: #selector(handleSubmit), for: .touchUpInside)
-        containerView.addSubview(submitButton)
-        submitButton.anchor(top: containerView.topAnchor, left: nil, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 50, height: 0)
-        
-        containerView.addSubview(self.commentTextField)
-        self.commentTextField.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: submitButton.leftAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        return containerView
-    }()
-    
-    @objc func handleSubmit() {
+    func didSubmit(for comment: String) {
         let values = [
-            "text": commentTextField.text ?? "",
+            "text": comment,
             "userId": Auth.auth().currentUser?.uid ?? "",
             "creationDate": Date().timeIntervalSince1970
         ] as [String : Any]
-        
+
         guard let userUid = post?.user.uid else { return }
         guard let postId = post?.id else { return }
         Firestore.firestore().collection("users").document(userUid).collection("posts").document(postId).collection("comments").addDocument(data: values) { (err) in
             if let err = err {
                 print("Error adding comment:",err)
             }
-            
+
             print("Successfully added comment.")
         }
-        
-        commentTextField.text = nil
+                
+        self.containerView.clearCommentField()
     }
+
     
     override var inputAccessoryView: UIView? {
         get {
