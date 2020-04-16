@@ -49,7 +49,6 @@ class CommentCell: UICollectionViewCell {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 14)
         tv.isScrollEnabled = false
-        //        label.numberOfLines = 0
         return tv
     }()
     

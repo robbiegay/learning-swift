@@ -25,9 +25,6 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         
         collectionView.backgroundColor = .white
         
-//        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
-//        collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: -50, right: 0)
-        
         collectionView.register(CommentCell.self, forCellWithReuseIdentifier: cellID)
         
         fetchComments()
@@ -36,7 +33,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     fileprivate func fetchComments() {
         guard let userUid = post?.user.uid else { return }
         guard let postId = post?.id else { return }
-        let ref = Firestore.firestore().collection("users").document(userUid).collection("posts").document(postId).collection("comments")
+        let ref = Firestore.firestore().collection("users").document(userUid).collection("posts").document(postId).collection("comments").order(by: "creationDate")
         
         ref.getDocuments { (snapshot, err) in
             if let err = err {
