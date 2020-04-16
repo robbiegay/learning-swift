@@ -114,6 +114,9 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
             }
 
             print("Successfully added comment.")
+            let comment = Comment(dictionary: values)
+            self.comments.append(comment)
+            self.collectionView.reloadData()
         }
                 
         self.containerView.clearCommentField()
