@@ -80,6 +80,8 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        isModalInPresentation = true
+        
         navigationController?.isNavigationBarHidden = true
         
         view.backgroundColor = .white
