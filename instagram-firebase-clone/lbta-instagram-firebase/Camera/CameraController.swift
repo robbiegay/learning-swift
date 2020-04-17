@@ -76,15 +76,26 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate, UIViewC
         
         var data: Data?
         
-        if #available(iOS 11.0, *) {
-            func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-                    data = photo.fileDataRepresentation()
-            }
-        } else {
+        // Attempt to fix outdate JPEG Representation function
+//        if #available(iOS 11.0, *) {
+//            func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+//                    data = photo.fileDataRepresentation()
+//            }
+//        } else {
             data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer!)
+//        }
+        
+        // Alerts the user if the camera fails to capture a photo
+        guard let unwrappedData = data else {
+            let alert = UIAlertController(title: "Failed to capture photo", message: "Please try again later.", preferredStyle: .alert)
+
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+
+            self.present(alert, animated: true)
+            return
         }
         
-        let previewImage = UIImage(data: data!)
+        let previewImage = UIImage(data: unwrappedData)
         
         let containerView = PreviewPhotoContainerView()
         containerView.previewImageView.image = previewImage
