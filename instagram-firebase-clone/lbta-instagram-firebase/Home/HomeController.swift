@@ -32,6 +32,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleRefresh() {
+        postsArray.removeAll()
+        collectionView.reloadData()
         fetchPosts()
     }
     
@@ -49,8 +51,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
-        //        postsArray.removeAll()
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
@@ -114,11 +114,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     self.postsArray.sort { (p1, p2) -> Bool in
                         return p1.creationDate.compare(p2.creationDate) == .orderedDescending
                     }
-                    
+                    self.collectionView.reloadData()
                 }
             }
-            
-            self.collectionView.reloadData()
         })
     }
     
