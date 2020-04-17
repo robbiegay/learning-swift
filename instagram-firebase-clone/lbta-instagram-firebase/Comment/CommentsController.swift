@@ -70,16 +70,31 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
-        let dummyCell = CommentCell(frame: frame)
-        dummyCell.comment = comments[indexPath.item]
-        dummyCell.layoutIfNeeded()
+//        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+//        let dummyCell = CommentCell(frame: frame)
+//        print("Comment at index path:",comments[indexPath.item])
+//        dummyCell.comment = comments[indexPath.item]
+//        print("Dummey cell height:",dummyCell.frame.height)
+//        dummyCell.layoutIfNeeded()
+//
+//        let targetSize = CGSize(width: view.frame.width, height: 1000)
+//        let estimatedSize = dummyCell.systemLayoutSizeFitting(targetSize)
+//        print("estimated size:",estimatedSize)
+//
+//        print("Estimated height:",estimatedSize.height)
+//
+//        let height = max(40 + 8 + 8, estimatedSize.height)
+//        print("Final height:",height)
+//        print("===================================")
+//        return CGSize(width: view.frame.width, height: 200)
         
-        let targetSize = CGSize(width: view.frame.width, height: 1000)
-        let estimatedSize = dummyCell.systemLayoutSizeFitting(targetSize)
+        // A hack to size the cell based on length of string
+        let commentTextLength = comments[indexPath.item].text.count
+        let numberOfLines = ceil(Double(commentTextLength) / 30)
+        let maxHeight = 12 * numberOfLines
+        let height = max(40 + 8 + 8, maxHeight)
         
-        let height = max(40 + 8 + 8, estimatedSize.height)
-        return CGSize(width: view.frame.width, height: height)
+        return CGSize(width: view.frame.width, height: CGFloat(height))
     }
     
     override func viewWillAppear(_ animated: Bool) {
