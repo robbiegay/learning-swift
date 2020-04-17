@@ -16,6 +16,7 @@
 		4551B1CF24463C98004F21E7 /* CustomAnimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4551B1CE24463C98004F21E7 /* CustomAnimationPresenter.swift */; };
 		45609D722434D73E00BF50C0 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D712434D73E00BF50C0 /* UserSearchController.swift */; };
 		45609D742434DAC900BF50C0 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45609D732434DAC900BF50C0 /* UserSearchCell.swift */; };
+		4564E28A244919CF00B7BF85 /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4564E289244919CF00B7BF85 /* NotificationsController.swift */; };
 		4585BE242446B8AD00ECEB3C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585BE232446B8AD00ECEB3C /* CommentCell.swift */; };
 		458C82BD2422C741008AD619 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 458C82BC2422C741008AD619 /* GoogleService-Info.plist */; };
 		4595CD77242D075B001F1AAE /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */; };
@@ -53,6 +54,7 @@
 		4551B1CE24463C98004F21E7 /* CustomAnimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimationPresenter.swift; sourceTree = "<group>"; };
 		45609D712434D73E00BF50C0 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		45609D732434DAC900BF50C0 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
+		4564E289244919CF00B7BF85 /* NotificationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
 		4585BE232446B8AD00ECEB3C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		458C82BC2422C741008AD619 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4595CD76242D075B001F1AAE /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		4564E288244919A900B7BF85 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				4564E289244919CF00B7BF85 /* NotificationsController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		4595CD75242D0745001F1AAE /* AddPhoto */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 		45B5CEF92422795900C757EF /* lbta-instagram-firebase */ = {
 			isa = PBXGroup;
 			children = (
+				4564E288244919A900B7BF85 /* Notifications */,
 				4525E01024464CAA00A03A08 /* Comment */,
 				45DD3551244526F600703104 /* Camera */,
 				45609D702434D70D00BF50C0 /* Search */,
@@ -380,6 +391,7 @@
 				459F0861242526A2007D403B /* MainTabBarController.swift in Sources */,
 				45DD35532445270600703104 /* CameraController.swift in Sources */,
 				452669F1243276A900CBF55A /* HomePostCell.swift in Sources */,
+				4564E28A244919CF00B7BF85 /* NotificationsController.swift in Sources */,
 				45D6F4C9242E4D8F00893585 /* SharePhotoController.swift in Sources */,
 				4585BE242446B8AD00ECEB3C /* CommentCell.swift in Sources */,
 				452669EF2432757600CBF55A /* HomeController.swift in Sources */,

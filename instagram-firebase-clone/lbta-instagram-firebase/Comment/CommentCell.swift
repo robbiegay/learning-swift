@@ -13,27 +13,31 @@ class CommentCell: UICollectionViewCell {
     
     var comment: Comment? {
         didSet {
-            guard let commentText = comment?.text else { return }
-            
-            guard let userUid = comment?.userId else { return }
-            
-            Firestore.firestore().collection("users").document(userUid).getDocument { (snapshot, err) in
-                if let err = err {
-                    print("Failed to fetch comment user profiles:",err)
-                }
-                
-                guard let profileImageUrl = snapshot?.data()?["profilePictureURL"] as? String else { return }
-                
-                guard let username = snapshot?.data()?["username"] as? String else { return }
-                
-                self.profileImageView.loadImage(urlString: profileImageUrl)
-                
-                let attributedText = NSMutableAttributedString(string: "\(username) ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-                
-                attributedText.append(NSAttributedString(string: commentText, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
-                
-                self.textView.attributedText = attributedText
+            fetchComment()
+        }
+    }
+    
+    func fetchComment() {
+        guard let commentText = comment?.text else { return }
+        
+        guard let userUid = comment?.userId else { return }
+        
+        Firestore.firestore().collection("users").document(userUid).getDocument { (snapshot, err) in
+            if let err = err {
+                print("Failed to fetch comment user profiles:",err)
             }
+            
+            guard let profileImageUrl = snapshot?.data()?["profilePictureURL"] as? String else { return }
+            
+            guard let username = snapshot?.data()?["username"] as? String else { return }
+            
+            self.profileImageView.loadImage(urlString: profileImageUrl)
+            
+            let attributedText = NSMutableAttributedString(string: "\(username) ", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            
+            attributedText.append(NSAttributedString(string: commentText, attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14)]))
+            
+            self.textView.attributedText = attributedText
         }
     }
     
@@ -49,7 +53,6 @@ class CommentCell: UICollectionViewCell {
         let tv = UITextView()
         tv.font = UIFont.systemFont(ofSize: 14)
         tv.isScrollEnabled = false
-        //        label.numberOfLines = 0
         return tv
     }()
     

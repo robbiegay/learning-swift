@@ -32,6 +32,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleRefresh() {
+        // Clears the posts array and removes all posts from screen
+        // Before rebuilding everything from the ground up
+        postsArray.removeAll()
+        collectionView.reloadData()
         fetchPosts()
     }
     
@@ -49,8 +53,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     fileprivate func fetchPosts() {
-        postsArray.removeAll()
-        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
             if let err = err {
@@ -80,9 +82,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 print("Failed to fetch user posts:",err)
             }
             
-            // Clears the post array when the snapshot listener is triggered
-            //            self.postsArray.removeAll()
-            
             guard let documents = snapshot?.documents else { return }
             
             for document in documents {
@@ -92,26 +91,34 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 guard let postId = post.id else { return }
                 guard let currentUserUid = Auth.auth().currentUser?.uid else { return }
                 Firestore.firestore().collection("users").document(user.uid).collection("posts").document(postId).collection("likes").document(currentUserUid).getDocument { (snapshot, err) in
-                        if let err = err {
-                            print("Failed to fetch likes:",err)
-                            return
-                        }
-                                                                    
-                        if let value = snapshot?.data()?[currentUserUid] as? Int, value == 1 {
-                            post.hasLiked = true
-                        } else {
-                            post.hasLiked = false
-                        }
-                        
-                        self.postsArray.append(post)
-                        
-                        self.postsArray.sort { (p1, p2) -> Bool in
-                            return p1.creationDate.compare(p2.creationDate) == .orderedDescending
-                        }
+                    if let err = err {
+                        print("Failed to fetch likes:",err)
+                        return
                     }
+                    
+                    if let value = snapshot?.data()?[currentUserUid] as? Int, value == 1 {
+                        post.hasLiked = true
+                    } else {
+                        post.hasLiked = false
+                    }
+                    
+                    // check if the post already exsits in the array
+                    // If so, skip adding that post to the array
+                    
+                    if self.postsArray.contains(where: { (postItem) -> Bool in
+                        return post.id == postItem.id
+                    }) {
+                        return
+                    }
+                    
+                    self.postsArray.append(post)
+                    
+                    self.postsArray.sort { (p1, p2) -> Bool in
+                        return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+                    }
+                    self.collectionView.reloadData()
+                }
             }
-            
-            self.collectionView.reloadData()
         })
     }
     
