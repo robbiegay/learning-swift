@@ -250,7 +250,7 @@ class UserProfileHeader: UICollectionViewCell {
                 self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
             }
         // Unfollow User
-        } else {
+        } else if editProfileFollowButton.titleLabel?.text == "Unfollow" {
             // arrayRemove removes a value from the array
             let values = ["following": FieldValue.arrayRemove([userId])]
             ref.setData(values, merge: true) { (err) in
