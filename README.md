@@ -4,8 +4,8 @@ This repo contains several projects that I have built as part of my process to l
 
 Two app that I have completed as part of this process are a calculator app, and a close of the Instagram app.
 
-You can watch a video demo of the Calculator app here: [Calculator – YouTube]()
-You can watch a video demo of the Instagram close here: [Instagram Clone – YouTube](https://www.youtube.com/watch?v=tRLZppAY7Ik)
+You can watch a video demo of the Calculator app here: [Calculator – YouTube](https://www.youtube.com/watch?v=koZmsJvPW5k)
+You can watch a video demo of the Instagram close here: [Instagram Clone – YouTube](https://www.youtube.com/watch?v=BcsI42rxDQs)
 
 ## Calculator
 
