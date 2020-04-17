@@ -61,3 +61,4 @@ If you've found a bug in my code, please feel free to send me an Issue!
 
 * I have been watching several of Brian Voong's "Let's Build That App" tutorials: [Let's Build That App](https://www.letsbuildthatapp.com/)
 * [Tommy Warner](https://github.com/trwarner44) has really helped mentor me in the field of iOS development.
+* Instagram clone app icon made by [Pixel Perfect](https://www.flaticon.com/authors/pixel-perfect), and downloaded from [flaticon.com](https://www.flaticon.com/)
