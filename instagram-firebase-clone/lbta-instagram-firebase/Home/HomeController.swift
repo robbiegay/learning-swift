@@ -32,6 +32,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleRefresh() {
+        // Clears the posts array and removes all posts from screen
+        // Before rebuilding everything from the ground up
         postsArray.removeAll()
         collectionView.reloadData()
         fetchPosts()

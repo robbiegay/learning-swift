@@ -19,7 +19,7 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         super.viewDidLoad()
         
         navigationItem.title = "Comments"
-        
+                
         collectionView.alwaysBounceVertical = true
         collectionView.keyboardDismissMode = .interactive
         
@@ -90,9 +90,15 @@ class CommentsController: UICollectionViewController, UICollectionViewDelegateFl
         
         // A hack to size the cell based on length of string
         let commentTextLength = comments[indexPath.item].text.count
-        let numberOfLines = ceil(Double(commentTextLength) / 30)
-        let maxHeight = 12 * numberOfLines
+        print("comment text length",commentTextLength)
+        let numberOfLines = ceil(Double(commentTextLength) / 10)
+        print("number of lines",numberOfLines)
+        let maxHeight = 10 * numberOfLines
+        print("max height:",maxHeight)
         let height = max(40 + 8 + 8, maxHeight)
+        print("final height",height)
+        print("===================================")
+
         
         return CGSize(width: view.frame.width, height: CGFloat(height))
     }
