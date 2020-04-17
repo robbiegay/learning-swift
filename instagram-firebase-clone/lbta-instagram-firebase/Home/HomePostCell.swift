@@ -96,7 +96,6 @@ class HomePostCell: UICollectionViewCell {
     let captionLabel: UILabel = {
         let label = UILabel()
         
-//        label.attributedText = attributedText
         label.numberOfLines = 0
         
         return label

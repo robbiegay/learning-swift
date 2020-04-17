@@ -39,7 +39,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: listCellId)
         
         fetchUser()
-        setupLogOutButton()
     }
     
     // Fetches the User's data from Firebase, stores it in a local variable
@@ -59,12 +58,18 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.collectionView.reloadData()
             
             self.paginatePosts()
+            self.setupLogOutButton()
         }
     }
     
     // Creates the logout button
     fileprivate func setupLogOutButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogout))
+        let currentPageUserId = user?.uid
+        let loggedInUserUid = Auth.auth().currentUser?.uid
+        
+        if currentPageUserId == loggedInUserUid {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "gear").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleLogout))
+        }
     }
     
     var value: Double = Date().timeIntervalSince1970

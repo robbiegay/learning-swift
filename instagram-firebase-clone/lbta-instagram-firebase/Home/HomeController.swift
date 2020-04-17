@@ -167,11 +167,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let values = [currentUserUid : post.hasLiked == true ? 0 : 1]
         Firestore.firestore().collection("users").document(post.user.uid).collection("posts").document(postId).collection("likes").document(currentUserUid).setData(values) { (err) in
             if let err = err {
-                print("Failed to like photo:",err)
+                print("Failed to like/unlike photo:",err)
                 return
             }
             
-            print("Successfully liked photo.")
+            print("Successfully liked/unliked photo.")
             
             post.hasLiked = !post.hasLiked
             

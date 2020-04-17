@@ -27,6 +27,8 @@ class UserProfileHeader: UICollectionViewCell {
             usernameLabel.text = user?.username
             
             setupEditFollowButton()
+            
+            getUserData()
         }
     }
     
@@ -69,7 +71,7 @@ class UserProfileHeader: UICollectionViewCell {
     let postsLabel: UILabel = {
         let label = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "7\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         
         attributedText.append(NSAttributedString(string: "posts", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
@@ -77,7 +79,6 @@ class UserProfileHeader: UICollectionViewCell {
         
         label.attributedText = attributedText
         
-        // number of lines = 0 gives you as many as you need
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
@@ -85,8 +86,8 @@ class UserProfileHeader: UICollectionViewCell {
     
     let followersLabel: UILabel = {
         let label = UILabel()
-        
-        let attributedText = NSMutableAttributedString(string: "51,237\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         
         attributedText.append(NSAttributedString(string: "followers", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
@@ -102,7 +103,7 @@ class UserProfileHeader: UICollectionViewCell {
     let followingLabel: UILabel = {
         let label = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "190\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         
         attributedText.append(NSAttributedString(string: "following", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
@@ -128,6 +129,80 @@ class UserProfileHeader: UICollectionViewCell {
         return button
     }()
     
+    fileprivate func getUserData() {
+        guard let userID = user?.uid else { return }
+        
+        let ref = Firestore.firestore().collection("users").document(userID)
+        
+        // Fetch number of posts value
+        ref.collection("posts").getDocuments { (snapshot, err) in
+            if let err = err {
+                print("Error fetching posts number:",err)
+                return
+            }
+            
+            guard let snapshotArray = snapshot else { return }
+            
+            let attributedText = NSMutableAttributedString(string: "\(snapshotArray.count)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            
+            attributedText.append(NSAttributedString(string: "posts", attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+            ]))
+            
+            self.postsLabel.attributedText = attributedText
+        }
+        
+        // Fetch followers value
+        Firestore.firestore().collection("users").getDocuments { (snapshot, err) in
+            if let err = err {
+                print("Error fetching followers number:",err)
+                return
+            }
+            
+            var followers = 0
+            
+            guard let documents = snapshot?.documents else { return }
+                        
+            for document in documents {
+                if document["following"] != nil {
+                    guard let followingArray = document["following"] as? [String] else { return }
+                    let ifTrue = followingArray.contains { (value) -> Bool in
+                        return userID == value
+                    }
+                    if ifTrue {
+                        followers += 1
+                    }
+                }
+                
+                let attributedText = NSMutableAttributedString(string: "\(followers)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+                
+                attributedText.append(NSAttributedString(string: "followers", attributes: [
+                    NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+                ]))
+                
+                self.followersLabel.attributedText = attributedText
+            }
+        }
+        
+        // Fetch following value
+        ref.getDocument { (snapshot, err) in
+            if let err = err {
+                print("Error fetching following number:",err)
+                return
+            }
+            
+            guard let followingArray = snapshot?.data()?["following"] as? [String] else { return }
+            
+            let attributedText = NSMutableAttributedString(string: "\(followingArray.count)\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            
+            attributedText.append(NSAttributedString(string: "following", attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+            ]))
+            
+            self.followingLabel.attributedText = attributedText
+        }
+    }
+    
     fileprivate func setupEditFollowButton() {
         guard let currentLoggedInUserID = Auth.auth().currentUser?.uid else { return }
         guard let userID = user?.uid else { return }
@@ -135,7 +210,6 @@ class UserProfileHeader: UICollectionViewCell {
         if currentLoggedInUserID == userID {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
         } else {
-            
             // check if following user
             Firestore.firestore().collection("users").document(currentLoggedInUserID).getDocument { (snapshot, err) in
                 if let err = err {
@@ -176,7 +250,7 @@ class UserProfileHeader: UICollectionViewCell {
                 self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
             }
         // Unfollow User
-        } else {
+        } else if editProfileFollowButton.titleLabel?.text == "Unfollow" {
             // arrayRemove removes a value from the array
             let values = ["following": FieldValue.arrayRemove([userId])]
             ref.setData(values, merge: true) { (err) in
