@@ -206,7 +206,7 @@ class UserProfileHeader: UICollectionViewCell {
     fileprivate func setupEditFollowButton() {
         guard let currentLoggedInUserID = Auth.auth().currentUser?.uid else { return }
         guard let userID = user?.uid else { return }
-        
+
         if currentLoggedInUserID == userID {
             editProfileFollowButton.setTitle("Edit Profile", for: .normal)
         } else {
@@ -215,7 +215,10 @@ class UserProfileHeader: UICollectionViewCell {
                 if let err = err {
                     print("Failed to check if following:",err)
                 }
-                guard let followingArray = snapshot?.data()?["following"] as? [String] else { return }
+                guard let followingArray = snapshot?.data()?["following"] as? [String] else {
+                    self.setupFollowStyle()
+                    return
+                }
                 let isFollowing = followingArray.contains(userID)
                 
                 if isFollowing {
